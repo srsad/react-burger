@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: calc(100vh - var(--burger-constructor-offset));
+  overflow: auto;
+}
+
+.elementStatic {
+  margin-left: 48px;
+}
+
+.element {
+  display: flex;
+  margin-left: 8px;
+  align-items: center;
+  gap: 15px;
+}

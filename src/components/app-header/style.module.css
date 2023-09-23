@@ -1,0 +1,29 @@
+.appHeader {
+  display: flex;
+  justify-content: center;
+  background-color: var(--background);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1280px;
+}
+
+.navinationList {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  list-style: none;
+  gap: 10px;
+}
+
+.navinationLogo {
+  margin-right: 186px;
+}
+
+.navinationProfile {
+  /*  */
+}
+

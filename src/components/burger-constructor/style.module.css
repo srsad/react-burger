@@ -1,0 +1,10 @@
+.burgerConstructor {
+  width: 600px;
+}
+
+.order {
+  display: flex;
+  justify-content: flex-end;
+  padding: 40px 16px;
+  gap: 40px;
+}
