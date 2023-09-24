@@ -1,0 +1,9 @@
+.amount{
+  display: flex;
+  gap: 8px;
+}
+
+.icon svg {
+  height: 36px;
+  width: 36px;
+}
