@@ -7,14 +7,14 @@ import {
 
 import { MenuItem } from './manu-item'
 
-import componentClasses from './style.module.css'
+import cls from './style.module.css'
 
 export const AppHeader = () => {
   return (
-    <header className={`${componentClasses.appHeader} text text_type_main-default pt-4 pb-4`}>
-      <section className={componentClasses.wrapper}>
+    <header className={`${cls.appHeader} text text_type_main-default pt-4 pb-4`}>
+      <section className={cls.wrapper}>
         <nav>
-          <ul className={componentClasses.navinationList}>
+          <ul className={cls.navinationList}>
             <li>
               <MenuItem
                 text="Конструктор"
@@ -31,9 +31,9 @@ export const AppHeader = () => {
           </ul>
         </nav>
         
-        <Logo className={componentClasses.navinationLogo} />
+        <Logo className={cls.navinationLogo} />
 
-        <section className={componentClasses.navinationProfile}>
+        <section className={cls.navinationProfile}>
           <MenuItem
             text="Личный кабинет"
             Icon={ProfileIcon}

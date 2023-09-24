@@ -4,17 +4,17 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerConstructorList } from './burger-constructor-list'
 import { BurgerConstructorAmount } from './burger-constructor-amount'
 
-import componentClasses from './style.module.css'
+import cls from './style.module.css'
 
 import { ingredientShape } from '../../types/common'
 
 export const BurgerConstructor = ({ ingredientsList }) => {
   return (
-    <div className={componentClasses.burgerConstructor}>
+    <div className={cls.burgerConstructor}>
       
       <BurgerConstructorList ingredientsList={ingredientsList} />
 
-      <section className={componentClasses.order}>
+      <section className={cls.order}>
         <BurgerConstructorAmount totalAmount={610} />
 
         <Button

@@ -5,7 +5,7 @@ import { BurgerIngredientsTabs } from './burger-ingredients-tabs'
 import { BurgerIngredientsGroup } from './burger-ingredients-group'
 import { TABS_TYPES, TABS_TYPES_LOCALE, INGREDIENT_SECTION_IDS } from '../../shared/common'
 
-import componentClasses from './style.module.css'
+import cls from './style.module.css'
 
 import { ingredientShape } from '../../types/common'
 
@@ -13,16 +13,16 @@ import { ingredientShape } from '../../types/common'
  * Группировка данных по - type
  */
 function groupByType(data) {
-  const grouped = {};
+  const grouped = {}
 
   for (const item of data) {
     if (!grouped[item.type]) {
-      grouped[item.type] = [];
+      grouped[item.type] = []
     }
-    grouped[item.type].push(item);
+    grouped[item.type].push(item)
   }
 
-  return grouped;
+  return grouped
 }
 
 export const BurgerIngredients = ({ ingredientsList }) => {
@@ -48,7 +48,7 @@ export const BurgerIngredients = ({ ingredientsList }) => {
           callback={changeActiveTab}
         />
 
-        <section className={`${componentClasses.ingredients} ingredients-container custom-scroll`}>
+        <section className={`${cls.ingredients} ingredients-container custom-scroll`}>
           <BurgerIngredientsGroup
             title={TABS_TYPES_LOCALE[TABS_TYPES.BUN]}
             ingredientsList={groupingIngredientsList[TABS_TYPES.BUN]}

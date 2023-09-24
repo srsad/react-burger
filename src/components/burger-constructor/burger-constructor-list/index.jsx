@@ -3,7 +3,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 
 import { TABS_TYPES } from '../../../shared/common'
 
-import componentClasses from './style.module.css'
+import cls from './style.module.css'
 
 import { ingredientShape } from '../../../types/common'
 
@@ -15,7 +15,7 @@ export const BurgerConstructorList = ({ ingredientsList }) => {
 
   const otherTopingsList = otherTopings.map((el) => (
     <div
-      className={componentClasses.element}
+      className={cls.element}
       key={el._id}
     >
       <DragIcon type="primary" />
@@ -29,28 +29,28 @@ export const BurgerConstructorList = ({ ingredientsList }) => {
 
   return (
     <div className="">
-      <div className={componentClasses.wrapper}>
+      <div className={cls.wrapper}>
         {buns && (
           <ConstructorElement
-            extraClass={componentClasses.elementStatic}
+            extraClass={cls.elementStatic}
             type="top"
             isLocked={true}
-            text={buns.name}
+            text={`${buns.name} (верх)`}
             price={buns.proice}
             thumbnail={buns.image}
           />
         )}
 
-        <section className={`${componentClasses.list} custom-scroll`}>
+        <section className={`${cls.list} custom-scroll`}>
           {otherTopings.length && (otherTopingsList)}
         </section>
 
         {buns && (
           <ConstructorElement
-            extraClass={componentClasses.elementStatic}
+            extraClass={cls.elementStatic}
             type="bottom"
             isLocked={true}
-            text={buns.name}
+            text={`${buns.name} (низ)`}
             price={buns.proice}
             thumbnail={buns.image}
           />

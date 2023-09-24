@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { BurgerIngredientsItem } from '../burger-ingredients-item'
 
 import { INGREDIENT_SECTION_IDS, TABS_TYPES } from '../../../shared/common'
-import componentClasses from './style.module.css'
+import cls from './style.module.css'
 
 import { ingredientShape } from '../../../types/common'
 
@@ -16,7 +16,7 @@ export const BurgerIngredientsGroup = ({title, type, ingredientsList}) => {
     <div id={INGREDIENT_SECTION_IDS[type]} className="pb-10">
       <h3 className="text text_type_main-medium">{title}</h3>
 
-      <section className={componentClasses.wrapper}>
+      <section className={cls.wrapper}>
           {ingredientsCards}
       </section>
     </div>
