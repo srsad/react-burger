@@ -13,7 +13,7 @@ export const OrderDetails = ({orderNumber, onClose}) => {
         <p className={`${cls.orderNumberDescription} text text_type_main-medium`}>идентификатор заказа</p>
 
         <div className={cls.image}>
-          <img src='/done.png' alt="Ваш заказ начали готовить"/>
+          <img src='/images/done.png' alt="Ваш заказ начали готовить"/>
         </div>
 
         <p className="text text_type_main-default text-center mb-2">Ваш заказ начали готовить</p>
