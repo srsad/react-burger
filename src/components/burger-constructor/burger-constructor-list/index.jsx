@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
 
 import { TABS_TYPES } from '../../../shared/common'
 
@@ -42,7 +42,7 @@ export const BurgerConstructorList = ({ ingredientsList }) => {
         )}
 
         <section className={`${cls.list} custom-scroll`}>
-          {otherTopings.length && (otherTopingsList)}
+          {!!otherTopings.length && (otherTopingsList)}
         </section>
 
         {buns && (

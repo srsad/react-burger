@@ -2,3 +2,7 @@
   --burger-ingredients-offset: 300px;
   --burger-constructor-offset: 535px;
 }
+
+.text-center {
+  text-align: center;
+}

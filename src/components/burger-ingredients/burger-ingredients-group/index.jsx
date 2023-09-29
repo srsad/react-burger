@@ -7,9 +7,14 @@ import cls from './style.module.css'
 
 import { ingredientShape } from '../../../types/common'
 
-export const BurgerIngredientsGroup = ({title, type, ingredientsList}) => {
+export const BurgerIngredientsGroup = ({title, type, ingredientsList, handleClick}) => {
   const ingredientsCards = ingredientsList.map((ingredient) => (
-    <BurgerIngredientsItem ingredient={ingredient} count={55} key={ingredient._id} />
+    <BurgerIngredientsItem
+      ingredient={ingredient}
+      count={55}
+      key={ingredient._id}
+      handleClick={handleClick}
+    />
   ))
 
   return (
@@ -17,7 +22,7 @@ export const BurgerIngredientsGroup = ({title, type, ingredientsList}) => {
       <h3 className="text text_type_main-medium">{title}</h3>
 
       <section className={cls.wrapper}>
-          {ingredientsCards}
+        {ingredientsCards}
       </section>
     </div>
   )
@@ -26,11 +31,13 @@ export const BurgerIngredientsGroup = ({title, type, ingredientsList}) => {
 BurgerIngredientsGroup.defaultProps = {
   title: '',
   type: TABS_TYPES,
-  ingredientsList: []
+  ingredientsList: [],
+  handleClick: () => {}
 }
 
 BurgerIngredientsGroup.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(TABS_TYPES)).isRequired,
-  ingredientsList: PropTypes.arrayOf(ingredientShape)
+  ingredientsList: PropTypes.arrayOf(ingredientShape),
+  handleClick: PropTypes.func.isRequired
 }

@@ -1,13 +1,13 @@
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import PropTypes from 'prop-types'
-import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components"
 
 import cls from './style.module.css'
 
 import { ingredientShape } from '../../../types/common'
 
-export const BurgerIngredientsItem = ({ingredient, count}) => {
+export const BurgerIngredientsItem = ({ingredient, count, handleClick}) => {
   return (
-    <div className={`${cls.item} mt-6`}>
+    <div className={`${cls.item} mt-6`} onClick={() => handleClick(ingredient)}>
       <section className={cls.image}>
         <img src={ingredient.image} alt={ingredient.name}/>
       </section>
