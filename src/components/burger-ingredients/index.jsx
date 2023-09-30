@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 
 import { INGREDIENT_SECTION_IDS, TABS_TYPES, TABS_TYPES_LOCALE } from '../../shared/common'
-import { IngredientDetails } from './burger-ingredient-details'
+import { IngredientDetails } from '../burger-ingredient-details'
 import { BurgerIngredientsGroup } from './burger-ingredients-group'
 import { BurgerIngredientsTabs } from './burger-ingredients-tabs'
 

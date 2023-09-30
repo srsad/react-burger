@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 
-import { Modal } from '../../ui/modal'
+import { Modal } from '../ui/modal'
 
-import { ingredientShape } from '../../../types/common'
+import { ingredientShape } from '../../types/common'
 import cls from './style.module.css'
 
 export const IngredientDetails = ({ingredient, onClose}) => {

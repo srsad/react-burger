@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-import { Modal } from '../../ui/modal'
+import { Modal } from '../ui/modal'
 
 import cls from './style.module.css'
 

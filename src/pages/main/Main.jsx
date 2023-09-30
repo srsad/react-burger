@@ -5,11 +5,14 @@ import { $api } from '../../api'
 import { AppHeader } from '../../components/app-header'
 import { BurgerConstructor } from '../../components/burger-constructor'
 import { BurgerIngredients } from '../../components/burger-ingredients'
+import { ErrorNotificationDetails } from '../../components/error-notification-details'
+import { checkReponse } from '../../utils/common'
 
 import cls from './style.module.css'
 
 const Main = () => {
   const [ingredients, setIngredients] = useState([])
+  const [errorNotification, setErrorNotification] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -20,10 +23,12 @@ const Main = () => {
     setLoading(true)
     try {
       const response = await $api.ingredients.getIngredients()
-      const { data } = await response.json()
+      const { data } = await checkReponse(response)
       setIngredients(data)
     } catch (error) {
-      console.error('Не удалось получить список ингредиентов', error)
+      const errorMessage = 'Не удалось получить список ингредиентов'
+      console.error(errorMessage, error)
+      setErrorNotification(errorMessage)
     } finally {
       setLoading(false)
     }
@@ -31,6 +36,13 @@ const Main = () => {
 
   return (
     <div className={cls.main}>
+      {errorNotification && (
+        <ErrorNotificationDetails
+          errorText={errorNotification}
+          onClose={() => setErrorNotification('')}
+        />
+      )}
+
       <AppHeader />
 
       <section className={cls.content}>

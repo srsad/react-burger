@@ -47,5 +47,6 @@ Modal.defaultProps = {
 
 Modal.propTypes = {
   titlle: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.element
 }
