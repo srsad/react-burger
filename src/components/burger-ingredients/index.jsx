@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { INGREDIENT_SECTION_IDS, TABS_TYPES, TABS_TYPES_LOCALE } from '../../shared/common'
 import { IngredientDetails } from '../burger-ingredient-details'
+import { Modal } from '../ui/modal'
 import { BurgerIngredientsGroup } from './burger-ingredients-group'
 import { BurgerIngredientsTabs } from './burger-ingredients-tabs'
 
@@ -72,7 +73,11 @@ export const BurgerIngredients = ({ ingredientsList, loading }) => {
 
   return (
     <div>
-      {showModal && (<IngredientDetails ingredient={activeIngredient} onClose={closeModal} />)}
+      {showModal && (
+        <Modal onClose={closeModal} titlle="Детали ингредиента">
+          <IngredientDetails ingredient={activeIngredient} />
+        </Modal>
+      )}
 
       <BurgerIngredientsTabs
         activeTabItem={activeTab}

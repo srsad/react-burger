@@ -36,7 +36,7 @@ const Main = () => {
 
   return (
     <div className={cls.main}>
-      {errorNotification && (
+      {!!errorNotification && (
         <ErrorNotificationDetails
           errorText={errorNotification}
           onClose={() => setErrorNotification('')}

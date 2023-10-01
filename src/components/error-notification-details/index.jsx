@@ -13,10 +13,10 @@ export const ErrorNotificationDetails = ({errorText, onClose}) => {
     return () => {
       clearTimeout(timer)
     }
-  }, [])
+  }, [onClose])
 
   return (
-    <Modal onClose={onClose} titlle="Ошибка">
+    <Modal onClose={onClose} titlle="Ошибка!">
       <p className={`${cls.error} text text_type_main-default`}>{errorText}</p>
     </Modal>
   )

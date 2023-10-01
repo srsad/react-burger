@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 
 import { OrderDetails } from '../burger-order-details'
+import { Modal } from '../ui/modal'
 import { BurgerConstructorAmount } from './burger-constructor-amount'
 import { BurgerConstructorList } from './burger-constructor-list'
 
@@ -17,15 +18,15 @@ export const BurgerConstructor = ({ ingredientsList }) => {
   const [showModal, setShowModal] = useState(false)
   // TODO: когда будет понятна сущьность заказа - вынести в шейп и прокидывать в OrderDetails
   const [orderParams, setOrderParams] = useState({orderNumber: '034536'})
-  
-  function closeModal() {
-    setShowModal(false)
-  }
 
   return (
     <div className={cls.burgerConstructor}>
 
-      {showModal && (<OrderDetails orderNumber={orderParams.orderNumber} onClose={closeModal} />)}
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <OrderDetails orderNumber={orderParams.orderNumber} />
+        </Modal>
+      )}
       
       <BurgerConstructorList ingredientsList={ingredientsList} />
 
