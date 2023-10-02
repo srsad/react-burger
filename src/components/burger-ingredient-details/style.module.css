@@ -1,0 +1,17 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 6px;
+}
+
+.details {
+  display: flex;
+  gap: 50px;
+  margin-top: 30px;
+}

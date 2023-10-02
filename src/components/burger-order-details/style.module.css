@@ -1,0 +1,19 @@
+.order {
+  margin-bottom: 60px;
+}
+
+.orderNumber {
+  text-shadow: 0px 0px 20px var(--colors-interface-accent);
+  margin: 35px 0;
+}
+
+.orderNumberDescription {
+  text-align: center;
+}
+
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 58px 0;
+}
