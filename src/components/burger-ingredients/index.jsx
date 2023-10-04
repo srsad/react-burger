@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { INGREDIENT_SECTION_IDS, TABS_TYPES, TABS_TYPES_LOCALE } from '../../shared/common'
 import { IngredientDetails } from '../burger-ingredient-details'
@@ -9,7 +9,7 @@ import { BurgerIngredientsTabs } from './burger-ingredients-tabs'
 
 import cls from './style.module.css'
 
-import { ingredientShape } from '../../types/common'
+import { IngredientContext } from '../../services/ingredientContext'
 
 /**
  * Группировка данных по - type
@@ -33,7 +33,9 @@ const ingredientStatus = ({ title }) => (
   </div>  
 )
 
-export const BurgerIngredients = ({ ingredientsList, loading }) => {
+export const BurgerIngredients = ({ loading }) => {
+  const [ingredientsList] = useContext(IngredientContext)
+
   /**
    * Детальное окно ингредиента
   */
@@ -111,11 +113,9 @@ export const BurgerIngredients = ({ ingredientsList, loading }) => {
 }
 
 BurgerIngredients.defaultProps = {
-  ingredientsList: [],
   loading: true
 }
 
 BurgerIngredients.propTypes = {
-  ingredientsList: PropTypes.arrayOf(ingredientShape).isRequired,
   loading: PropTypes.bool.isRequired
 }
