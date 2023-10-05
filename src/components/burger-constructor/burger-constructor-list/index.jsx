@@ -1,23 +1,25 @@
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
+import {
+  ConstructorElement,
+  DragIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components"
+import PropTypes from "prop-types"
 
-import { TABS_TYPES } from '../../../shared/common'
+import { TABS_TYPES } from "../../../shared/common"
 
-import cls from './style.module.css'
+import cls from "./style.module.css"
 
-import { ingredientShape } from '../../../types/common'
+import { ingredientShape } from "../../../types/common"
 
 export const BurgerConstructorList = ({ ingredientsList }) => {
   // только булочки
-  const buns = ingredientsList.find(el => el.type === TABS_TYPES.BUN)
+  const buns = ingredientsList.find((el) => el.type === TABS_TYPES.BUN)
   // все остольное
-  const otherTopings = ingredientsList.filter(el => el.type !== TABS_TYPES.BUN)
+  const otherTopings = ingredientsList.filter(
+    (el) => el.type !== TABS_TYPES.BUN
+  )
 
   const otherTopingsList = otherTopings.map((el) => (
-    <div
-      className={cls.element}
-      key={el._id}
-    >
+    <div className={cls.element} key={el._id}>
       <DragIcon type="primary" />
       <ConstructorElement
         text={el.name}
@@ -42,7 +44,7 @@ export const BurgerConstructorList = ({ ingredientsList }) => {
         )}
 
         <section className={`${cls.list} custom-scroll`}>
-          {!!otherTopings.length && (otherTopingsList)}
+          {!!otherTopings.length && otherTopingsList}
         </section>
 
         {buns && (
@@ -61,10 +63,10 @@ export const BurgerConstructorList = ({ ingredientsList }) => {
 }
 
 BurgerConstructorList.defaultProps = {
-  ingredientsList: []
+  ingredientsList: [],
 }
 
 BurgerConstructorList.propTypes = {
   // TODO: разобраться, тут arrayOf илипросто array
-  ingredientsList: PropTypes.arrayOf(ingredientShape).isRequired
+  ingredientsList: PropTypes.arrayOf(ingredientShape).isRequired,
 }

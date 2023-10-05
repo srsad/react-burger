@@ -1,18 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
-import { $api } from '../../api'
+import { $api } from "../../api"
 
-import { AppHeader } from '../../components/app-header'
-import { BurgerConstructor } from '../../components/burger-constructor'
-import { BurgerIngredients } from '../../components/burger-ingredients'
-import { ErrorNotificationDetails } from '../../components/error-notification-details'
-import { checkReponse } from '../../utils/common'
+import { AppHeader } from "../../components/app-header"
+import { BurgerConstructor } from "../../components/burger-constructor"
+import { BurgerIngredients } from "../../components/burger-ingredients"
+import { ErrorNotificationDetails } from "../../components/error-notification-details"
+import { checkReponse } from "../../utils/common"
 
-import cls from './style.module.css'
+import { ErrorContext } from "../../services/errorContext"
+import { IngredientContext } from "../../services/ingredientContext"
+import { OrderContext } from "../../services/orderContext"
+
+import cls from "./style.module.css"
 
 const Main = () => {
-  const [ingredients, setIngredients] = useState([])
-  const [errorNotification, setErrorNotification] = useState('')
+  const ingredientsState = useState([])
+  const orderState = useState([])
+  const [ingredients, setIngredients] = ingredientsState
+
+  const errorState = useState("")
+  const [errorNotification, setErrorNotification] = errorState
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -26,7 +34,7 @@ const Main = () => {
       const { data } = await checkReponse(response)
       setIngredients(data)
     } catch (error) {
-      const errorMessage = 'Не удалось получить список ингредиентов'
+      const errorMessage = "Не удалось получить список ингредиентов!"
       console.error(errorMessage, error)
       setErrorNotification(errorMessage)
     } finally {
@@ -39,7 +47,7 @@ const Main = () => {
       {!!errorNotification && (
         <ErrorNotificationDetails
           errorText={errorNotification}
-          onClose={() => setErrorNotification('')}
+          onClose={() => setErrorNotification("")}
         />
       )}
 
@@ -51,13 +59,19 @@ const Main = () => {
         </h1>
 
         <section className={cls.constructor}>
-          <BurgerIngredients ingredientsList={ingredients} loading={loading} />
+          <ErrorContext.Provider value={errorState}>
+            <IngredientContext.Provider value={ingredientsState}>
+              <BurgerIngredients loading={loading} />
 
-          <BurgerConstructor ingredientsList={ingredients} />
+              <OrderContext.Provider value={orderState}>
+                <BurgerConstructor ingredientsList={ingredients} />
+              </OrderContext.Provider>
+            </IngredientContext.Provider>
+          </ErrorContext.Provider>
         </section>
       </section>
     </div>
-  );
+  )
 }
 
 export default Main

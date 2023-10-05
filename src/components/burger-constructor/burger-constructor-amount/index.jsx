@@ -1,14 +1,12 @@
-import PropTypes from 'prop-types'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import PropTypes from "prop-types"
 
-import cls from './style.module.css'
+import cls from "./style.module.css"
 
 export const BurgerConstructorAmount = ({ totalAmount }) => {
   return (
     <p className={cls.amount}>
-      <span className="text text_type_digits-medium">
-        {totalAmount}
-      </span>
+      <span className="text text_type_digits-medium">{totalAmount}</span>
       <span className={cls.icon}>
         <CurrencyIcon type="primary" />
       </span>
@@ -17,5 +15,5 @@ export const BurgerConstructorAmount = ({ totalAmount }) => {
 }
 
 BurgerConstructorAmount.propTypes = {
-  totalAmount: PropTypes.number.isRequired
+  totalAmount: PropTypes.number.isRequired,
 }

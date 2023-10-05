@@ -1,13 +1,13 @@
 export const TABS_TYPES = {
-  BUN: 'bun',
-  SAUCE: 'sauce',
-  MAIN: 'main',   
+  BUN: "bun",
+  SAUCE: "sauce",
+  MAIN: "main",
 }
 
 export const TABS_TYPES_LOCALE = {
-  [TABS_TYPES.BUN]: 'Булки',
-  [TABS_TYPES.SAUCE]: 'Соусы',
-  [TABS_TYPES.MAIN]: 'Начинки',
+  [TABS_TYPES.BUN]: "Булки",
+  [TABS_TYPES.SAUCE]: "Соусы",
+  [TABS_TYPES.MAIN]: "Начинки",
 }
 
 export const INGREDIENT_SECTION_IDS = {

@@ -1,28 +1,28 @@
-import PropTypes from 'prop-types'
-import { useEffect } from 'react'
-import { createPortal } from 'react-dom'
+import PropTypes from "prop-types"
+import { useEffect } from "react"
+import { createPortal } from "react-dom"
 
-import { ModalHeader } from './modal-header'
-import { ModalOverlay } from './modal-overlay'
+import { ModalHeader } from "./modal-header"
+import { ModalOverlay } from "./modal-overlay"
 
-import cls from './style.module.css'
+import cls from "./style.module.css"
 
 const modalCcontaner = document.getElementById("modal-contaner")
 const bodyTag = document.querySelector("body")
 
 export const Modal = ({ onClose, titlle, children }) => {
   useEffect(() => {
-		document.addEventListener('keyup', escHandler)
-    bodyTag.setAttribute('style', 'overflow: hidden')
+    document.addEventListener("keyup", escHandler)
+    bodyTag.setAttribute("style", "overflow: hidden")
 
-		return () => {
-      document.removeEventListener('keyup', escHandler)
-      bodyTag.removeAttribute('style')
-		}
-	}, [])
+    return () => {
+      document.removeEventListener("keyup", escHandler)
+      bodyTag.removeAttribute("style")
+    }
+  }, [])
 
   function escHandler(event) {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       onClose()
     }
   }
@@ -41,12 +41,12 @@ export const Modal = ({ onClose, titlle, children }) => {
 }
 
 Modal.defaultProps = {
-  titlle: '',
-  onClose: () => {}
+  titlle: "",
+  onClose: () => {},
 }
 
 Modal.propTypes = {
   titlle: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.element
+  children: PropTypes.element,
 }

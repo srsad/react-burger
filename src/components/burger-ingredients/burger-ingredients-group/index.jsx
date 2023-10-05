@@ -1,13 +1,18 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 
-import { BurgerIngredientsItem } from '../burger-ingredients-item'
+import { BurgerIngredientsItem } from "../burger-ingredients-item"
 
-import { INGREDIENT_SECTION_IDS, TABS_TYPES } from '../../../shared/common'
-import cls from './style.module.css'
+import { INGREDIENT_SECTION_IDS, TABS_TYPES } from "../../../shared/common"
+import cls from "./style.module.css"
 
-import { ingredientShape } from '../../../types/common'
+import { ingredientShape } from "../../../types/common"
 
-export const BurgerIngredientsGroup = ({title, type, ingredientsList, handleClick}) => {
+export const BurgerIngredientsGroup = ({
+  title,
+  type,
+  ingredientsList,
+  handleClick,
+}) => {
   const ingredientsCards = ingredientsList.map((ingredient) => (
     <BurgerIngredientsItem
       ingredient={ingredient}
@@ -21,23 +26,21 @@ export const BurgerIngredientsGroup = ({title, type, ingredientsList, handleClic
     <div id={INGREDIENT_SECTION_IDS[type]} className="pb-10">
       <h3 className="text text_type_main-medium">{title}</h3>
 
-      <section className={cls.wrapper}>
-        {ingredientsCards}
-      </section>
+      <section className={cls.wrapper}>{ingredientsCards}</section>
     </div>
   )
 }
 
 BurgerIngredientsGroup.defaultProps = {
-  title: '',
+  title: "",
   type: TABS_TYPES,
   ingredientsList: [],
-  handleClick: () => {}
+  handleClick: () => {},
 }
 
 BurgerIngredientsGroup.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(TABS_TYPES)).isRequired,
   ingredientsList: PropTypes.arrayOf(ingredientShape),
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
 }

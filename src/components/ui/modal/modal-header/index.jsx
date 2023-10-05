@@ -1,12 +1,14 @@
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import PropTypes from "prop-types"
 
-import cls from './style.module.css'
+import cls from "./style.module.css"
 
 export const ModalHeader = ({ title, onClose }) => {
   return (
     <div className={cls.header}>
-      <h3 className={`${cls.title} pt-4 pb-4 text text_type_main-large`}>{title}</h3>
+      <h3 className={`${cls.title} pt-4 pb-4 text text_type_main-large`}>
+        {title}
+      </h3>
 
       <button className={cls.close} onClick={onClose}>
         <CloseIcon type="primary" />
@@ -16,11 +18,11 @@ export const ModalHeader = ({ title, onClose }) => {
 }
 
 ModalHeader.defaultProps = {
-  titlle: '',
-  onClose: () => {}
+  titlle: "",
+  onClose: () => {},
 }
 
 ModalHeader.propTypes = {
   titlle: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 }

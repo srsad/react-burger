@@ -1,15 +1,18 @@
-import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import PropTypes from 'prop-types'
+import {
+  Counter,
+  CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components"
+import PropTypes from "prop-types"
 
-import cls from './style.module.css'
+import cls from "./style.module.css"
 
-import { ingredientShape } from '../../../types/common'
+import { ingredientShape } from "../../../types/common"
 
-export const BurgerIngredientsItem = ({ingredient, count, handleClick}) => {
+export const BurgerIngredientsItem = ({ ingredient, count, handleClick }) => {
   return (
     <div className={`${cls.item} mt-6`} onClick={() => handleClick(ingredient)}>
       <section className={cls.image}>
-        <img src={ingredient.image} alt={ingredient.name}/>
+        <img src={ingredient.image} alt={ingredient.name} />
       </section>
 
       <section className={cls.price}>
@@ -21,16 +24,16 @@ export const BurgerIngredientsItem = ({ingredient, count, handleClick}) => {
         {ingredient.name}
       </p>
 
-      {!!count &&
+      {!!count && (
         <section className={cls.count}>
-          <Counter count={count} size="default"/>
+          <Counter count={count} size="default" />
         </section>
-      }
+      )}
     </div>
   )
 }
 
 BurgerIngredientsItem.propTypes = {
   count: PropTypes.number.isRequired,
-  ingredient: ingredientShape.isRequired
+  ingredient: ingredientShape.isRequired,
 }
