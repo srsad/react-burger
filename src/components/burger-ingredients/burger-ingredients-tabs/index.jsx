@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types'
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
+import PropTypes from "prop-types"
 
-import { TABS_TYPES, TABS_TYPES_LOCALE } from '../../../shared/common'
+import { TABS_TYPES, TABS_TYPES_LOCALE } from "../../../shared/common"
 
-export const BurgerIngredientsTabs = ({activeTabItem, callback}) => {
+export const BurgerIngredientsTabs = ({ activeTabItem, callback }) => {
   const tabList = [
     {
       value: TABS_TYPES.BUN,
-      label: TABS_TYPES_LOCALE[TABS_TYPES.BUN]
+      label: TABS_TYPES_LOCALE[TABS_TYPES.BUN],
     },
     {
       value: TABS_TYPES.SAUCE,
-      label: TABS_TYPES_LOCALE[TABS_TYPES.SAUCE]
+      label: TABS_TYPES_LOCALE[TABS_TYPES.SAUCE],
     },
     {
       value: TABS_TYPES.MAIN,
-      label: TABS_TYPES_LOCALE[TABS_TYPES.MAIN]
+      label: TABS_TYPES_LOCALE[TABS_TYPES.MAIN],
     },
   ]
 
@@ -30,8 +30,8 @@ export const BurgerIngredientsTabs = ({activeTabItem, callback}) => {
   }
 
   return (
-    <div style={{ display: 'flex' }} className="mb-10">
-      {tabList.map((tabItem) => (            
+    <div style={{ display: "flex" }} className="mb-10">
+      {tabList.map((tabItem) => (
         <Tab
           value={tabItem.value}
           active={isActiveTab(tabItem.value)}
@@ -47,5 +47,5 @@ export const BurgerIngredientsTabs = ({activeTabItem, callback}) => {
 
 BurgerIngredientsTabs.propTypes = {
   activeTabItem: PropTypes.oneOf(Object.values(TABS_TYPES)).isRequired,
-  callback: PropTypes.func.isRequired
+  callback: PropTypes.func.isRequired,
 }

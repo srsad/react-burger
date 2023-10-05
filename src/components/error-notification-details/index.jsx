@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import PropTypes from "prop-types"
+import { useEffect } from "react"
 
-import { Modal } from '../ui/modal'
-import cls from './style.module.css'
+import { Modal } from "../ui/modal"
+import cls from "./style.module.css"
 
 const TIME_TO_CLOSE = 7000
 
-export const ErrorNotificationDetails = ({errorText, onClose}) => {
+export const ErrorNotificationDetails = ({ errorText, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, TIME_TO_CLOSE)
 
@@ -23,7 +23,7 @@ export const ErrorNotificationDetails = ({errorText, onClose}) => {
 }
 
 ErrorNotificationDetails.defaultProps = {
-  errorText: '',
+  errorText: "",
   onClose: () => {},
 }
 

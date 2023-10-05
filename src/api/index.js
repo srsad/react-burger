@@ -1,9 +1,9 @@
-import apiController from './apiController'
+import apiController from "./apiController"
 
-import ingredients from './entities/ingredients'
-import orders from './entities/orders'
+import ingredients from "./entities/ingredients"
+import orders from "./entities/orders"
 
 export const $api = {
   ingredients: ingredients(apiController),
-  orders: orders(apiController)
+  orders: orders(apiController),
 }

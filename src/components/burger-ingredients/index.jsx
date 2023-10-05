@@ -1,15 +1,19 @@
-import PropTypes from 'prop-types'
-import { useContext, useState } from 'react'
+import PropTypes from "prop-types"
+import { useContext, useState } from "react"
 
-import { INGREDIENT_SECTION_IDS, TABS_TYPES, TABS_TYPES_LOCALE } from '../../shared/common'
-import { IngredientDetails } from '../burger-ingredient-details'
-import { Modal } from '../ui/modal'
-import { BurgerIngredientsGroup } from './burger-ingredients-group'
-import { BurgerIngredientsTabs } from './burger-ingredients-tabs'
+import {
+  INGREDIENT_SECTION_IDS,
+  TABS_TYPES,
+  TABS_TYPES_LOCALE,
+} from "../../shared/common"
+import { IngredientDetails } from "../burger-ingredient-details"
+import { Modal } from "../ui/modal"
+import { BurgerIngredientsGroup } from "./burger-ingredients-group"
+import { BurgerIngredientsTabs } from "./burger-ingredients-tabs"
 
-import cls from './style.module.css'
+import cls from "./style.module.css"
 
-import { IngredientContext } from '../../services/ingredientContext'
+import { IngredientContext } from "../../services/ingredientContext"
 
 /**
  * Группировка данных по - type
@@ -30,7 +34,7 @@ function groupByType(data) {
 const ingredientStatus = ({ title }) => (
   <div>
     <h3 className="text text_type_main-medium text-center">{title}</h3>
-  </div>  
+  </div>
 )
 
 export const BurgerIngredients = ({ loading }) => {
@@ -38,7 +42,7 @@ export const BurgerIngredients = ({ loading }) => {
 
   /**
    * Детальное окно ингредиента
-  */
+   */
   const [showModal, setShowModal] = useState(false)
   const [activeIngredient, setActiveIngredient] = useState(null)
 
@@ -46,31 +50,33 @@ export const BurgerIngredients = ({ loading }) => {
     setActiveIngredient(ingredient)
     setShowModal(true)
   }
-  
+
   function closeModal() {
     setActiveIngredient(null)
     setShowModal(false)
   }
-  
+
   /**
    * Установка нового активного таба + скролл к нему
-  */
+   */
   const [activeTab, setActiveTab] = useState(TABS_TYPES.BUN)
   function changeActiveTab(newActiveTab) {
     setActiveTab(newActiveTab)
 
-    const ingredientsContainer = document.getElementById(INGREDIENT_SECTION_IDS[newActiveTab])
-    ingredientsContainer.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    const ingredientsContainer = document.getElementById(
+      INGREDIENT_SECTION_IDS[newActiveTab]
+    )
+    ingredientsContainer.scrollIntoView({ block: "start", behavior: "smooth" })
   }
 
   const groupingIngredientsList = groupByType(ingredientsList)
 
   if (loading) {
-    return ingredientStatus({title: 'Загрузка ...'})
+    return ingredientStatus({ title: "Загрузка ..." })
   }
 
   if (!loading && !ingredientsList.length) {
-    return ingredientStatus({title: 'Нет ингридиентов =('})
+    return ingredientStatus({ title: "Нет ингридиентов =(" })
   }
 
   return (
@@ -86,21 +92,23 @@ export const BurgerIngredients = ({ loading }) => {
         callback={changeActiveTab}
       />
 
-      <section className={`${cls.ingredients} ingredients-container custom-scroll`}>
+      <section
+        className={`${cls.ingredients} ingredients-container custom-scroll`}
+      >
         <BurgerIngredientsGroup
           title={TABS_TYPES_LOCALE[TABS_TYPES.BUN]}
           ingredientsList={groupingIngredientsList[TABS_TYPES.BUN]}
           type={TABS_TYPES.BUN}
           handleClick={clickToIngredient}
         />
-        
+
         <BurgerIngredientsGroup
           title={TABS_TYPES_LOCALE[TABS_TYPES.SAUCE]}
           ingredientsList={groupingIngredientsList[TABS_TYPES.SAUCE]}
           type={TABS_TYPES.SAUCE}
           handleClick={clickToIngredient}
         />
-        
+
         <BurgerIngredientsGroup
           title={TABS_TYPES_LOCALE[TABS_TYPES.MAIN]}
           ingredientsList={groupingIngredientsList[TABS_TYPES.MAIN]}
@@ -113,9 +121,9 @@ export const BurgerIngredients = ({ loading }) => {
 }
 
 BurgerIngredients.defaultProps = {
-  loading: true
+  loading: true,
 }
 
 BurgerIngredients.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 }
