@@ -1,3 +1,8 @@
+export const DND_TYPES = {
+  DROP_TYPES: 'ingredient',
+  DRAG_IN_CONSTRUCTOR: 'ingredientInConstructor',
+}
+
 export const TABS_TYPES = {
   BUN: "bun",
   SAUCE: "sauce",

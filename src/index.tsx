@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 import './index.css'
+
+import { store } from './services/store'
 
 import Main from './pages/main/Main'
 import reportWebVitals from './reportWebVitals'
@@ -10,7 +13,9 @@ const root = ReactDOM.createRoot(
 )
 root.render(
   <React.StrictMode>
-    <Main />
+    <Provider store={store}>
+      <Main />
+    </Provider>
   </React.StrictMode>
 )
 

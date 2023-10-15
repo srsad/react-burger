@@ -1,7 +1,10 @@
-import { ingredientShape } from "../../types/common"
+import { useSelector } from 'react-redux'
+
 import cls from "./style.module.css"
 
-export const IngredientDetails = ({ ingredient }) => {
+export const IngredientDetails = () => {
+  const ingredient = useSelector(state => state.ingredients.ingredientDetatl)
+
   return (
     <div className={cls.card}>
       <img
@@ -48,8 +51,4 @@ export const IngredientDetails = ({ ingredient }) => {
       </div>
     </div>
   )
-}
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientShape.isRequired,
 }

@@ -1,0 +1,6 @@
+.element {
+  display: flex;
+  margin-left: 8px;
+  align-items: center;
+  gap: 15px;
+}

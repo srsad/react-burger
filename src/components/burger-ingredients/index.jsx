@@ -1,5 +1,5 @@
-import PropTypes from "prop-types"
-import { useContext, useState } from "react"
+import { useState } from "react"
+import { useSelector, useDispatch } from 'react-redux'
 
 import {
   INGREDIENT_SECTION_IDS,
@@ -11,9 +11,9 @@ import { Modal } from "../ui/modal"
 import { BurgerIngredientsGroup } from "./burger-ingredients-group"
 import { BurgerIngredientsTabs } from "./burger-ingredients-tabs"
 
-import cls from "./style.module.css"
+import { setIngredientDetatl } from '../../services/reducers/ingredientsSlice'
 
-import { IngredientContext } from "../../services/ingredientContext"
+import cls from "./style.module.css"
 
 /**
  * Группировка данных по - type
@@ -37,22 +37,23 @@ const ingredientStatus = ({ title }) => (
   </div>
 )
 
-export const BurgerIngredients = ({ loading }) => {
-  const [ingredientsList] = useContext(IngredientContext)
+export const BurgerIngredients = () => {
+  const ingredientsList = useSelector((store) => store.ingredients.ingredientsList)
+  const loading = useSelector((store) => store.ingredients.loading)
+  const dispatch = useDispatch()
 
   /**
    * Детальное окно ингредиента
    */
   const [showModal, setShowModal] = useState(false)
-  const [activeIngredient, setActiveIngredient] = useState(null)
 
   function clickToIngredient(ingredient) {
-    setActiveIngredient(ingredient)
+    dispatch(setIngredientDetatl(ingredient))
     setShowModal(true)
   }
 
   function closeModal() {
-    setActiveIngredient(null)
+    dispatch(setIngredientDetatl(null))
     setShowModal(false)
   }
 
@@ -60,6 +61,34 @@ export const BurgerIngredients = ({ loading }) => {
    * Установка нового активного таба + скролл к нему
    */
   const [activeTab, setActiveTab] = useState(TABS_TYPES.BUN)
+
+  function scrollHandler() {
+    const container = document.querySelector('.ingredients-container')
+    const items = container.querySelectorAll('.burger-ingredients-group')
+
+    const tabsPositions = {
+      [TABS_TYPES.BUN]: 0,
+      [TABS_TYPES.SAUCE]: 0,
+      [TABS_TYPES.MAIN]: 0,
+    }
+
+    for (const item of items) {
+      tabsPositions[item.dataset.type] = item.getBoundingClientRect().top - container.getBoundingClientRect().top
+    }
+
+    const closestTab = findClosestToZeroKey(tabsPositions)
+
+    if (closestTab !== activeTab) {
+      setActiveTab(closestTab)
+    }
+  }
+
+  function findClosestToZeroKey(tabsPositions) {
+    return Object.keys(tabsPositions).reduce((prevKey, currKey) =>
+      Math.abs(tabsPositions[currKey]) < Math.abs(tabsPositions[prevKey]) ? currKey : prevKey
+    )
+  }
+  
   function changeActiveTab(newActiveTab) {
     setActiveTab(newActiveTab)
 
@@ -83,7 +112,7 @@ export const BurgerIngredients = ({ loading }) => {
     <div>
       {showModal && (
         <Modal onClose={closeModal} titlle="Детали ингредиента">
-          <IngredientDetails ingredient={activeIngredient} />
+          <IngredientDetails />
         </Modal>
       )}
 
@@ -94,6 +123,7 @@ export const BurgerIngredients = ({ loading }) => {
 
       <section
         className={`${cls.ingredients} ingredients-container custom-scroll`}
+        onScroll={scrollHandler}
       >
         <BurgerIngredientsGroup
           title={TABS_TYPES_LOCALE[TABS_TYPES.BUN]}
@@ -118,12 +148,4 @@ export const BurgerIngredients = ({ loading }) => {
       </section>
     </div>
   )
-}
-
-BurgerIngredients.defaultProps = {
-  loading: true,
-}
-
-BurgerIngredients.propTypes = {
-  loading: PropTypes.bool.isRequired,
 }

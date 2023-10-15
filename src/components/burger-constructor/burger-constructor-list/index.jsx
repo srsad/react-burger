@@ -1,72 +1,86 @@
-import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components"
-import PropTypes from "prop-types"
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useDispatch, useSelector } from 'react-redux'
+import { useDrop } from "react-dnd"
 
-import { TABS_TYPES } from "../../../shared/common"
+import { BurgerConstructorItem } from '../burger-constructor-item'
+import { setIngredientItem, setIngredientBun } from '../../../services/reducers/ingredientsSlice'
+
+import { TABS_TYPES, DND_TYPES } from "../../../shared/common"
 
 import cls from "./style.module.css"
 
-import { ingredientShape } from "../../../types/common"
-
-export const BurgerConstructorList = ({ ingredientsList }) => {
-  // только булочки
-  const buns = ingredientsList.find((el) => el.type === TABS_TYPES.BUN)
-  // все остольное
-  const otherTopings = ingredientsList.filter(
-    (el) => el.type !== TABS_TYPES.BUN
-  )
-
-  const otherTopingsList = otherTopings.map((el) => (
-    <div className={cls.element} key={el._id}>
-      <DragIcon type="primary" />
-      <ConstructorElement
-        text={el.name}
-        price={el.price}
-        thumbnail={el.image}
-      />
+// Пустой фрагмент конструктора
+const emptyConstructorFragment = (text = 'Выберите начинку', position = '') => {
+  return (
+    <div className={`${cls.emptyConstructorFragment} ${position}`}>
+      <p className="text text_type_main-default text_color_inactive">{text}</p>
     </div>
+  )
+}
+
+export const BurgerConstructorList = () => {
+  const dispatch = useDispatch()
+
+  // булочки
+  const buns = useSelector((store) => store.ingredients.burgerConstructor.bun)
+  // все остольное
+  const otherTopings = useSelector((store) => store.ingredients.burgerConstructor.items)
+
+  const [ , dropCntainerRef] = useDrop({
+    accept: DND_TYPES.DROP_TYPES,
+    drop(item) {
+      onDropHandler(item)
+    }
+  })
+
+  function onDropHandler(item) {
+    if (item.type === TABS_TYPES.BUN) {
+      dispatch(setIngredientBun(item))
+      return
+    }
+    
+    dispatch(setIngredientItem(item))
+  }
+
+  const otherTopingsList = otherTopings.map((el, index) => (
+    <BurgerConstructorItem
+      agregateIngridient={el}
+      index={index}
+      key={el.uuid}
+    />
   ))
 
   return (
-    <div className="">
-      <div className={cls.wrapper}>
-        {buns && (
+    <div className={cls.wrapper} ref={dropCntainerRef}>
+      {buns
+        ? (
           <ConstructorElement
             extraClass={cls.elementStatic}
             type="top"
             isLocked={true}
             text={`${buns.name} (верх)`}
-            price={buns.proice}
+            price={buns.price}
             thumbnail={buns.image}
           />
-        )}
+        )
+        : emptyConstructorFragment('Выберите булку', cls.emptyConstructorFragmentTop)}
 
-        <section className={`${cls.list} custom-scroll`}>
-          {!!otherTopings.length && otherTopingsList}
-        </section>
+      <section className={`${cls.list} custom-scroll`}>
+        {!!otherTopings.length ? otherTopingsList : emptyConstructorFragment('Выберите ингридиенты')}
+      </section>
 
-        {buns && (
+      {buns
+        ? (
           <ConstructorElement
             extraClass={cls.elementStatic}
             type="bottom"
             isLocked={true}
             text={`${buns.name} (низ)`}
-            price={buns.proice}
+            price={buns.price}
             thumbnail={buns.image}
           />
-        )}
-      </div>
+        )
+      : emptyConstructorFragment('Выберите булку', cls.emptyConstructorFragmentBottom)}
     </div>
   )
-}
-
-BurgerConstructorList.defaultProps = {
-  ingredientsList: [],
-}
-
-BurgerConstructorList.propTypes = {
-  // TODO: разобраться, тут arrayOf илипросто array
-  ingredientsList: PropTypes.arrayOf(ingredientShape).isRequired,
 }
