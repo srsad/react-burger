@@ -11,10 +11,10 @@ import { ingredientShape } from "../../../types/common"
 const QUANTITY_FOR_BUN_BE_USED = 2
 
 export const BurgerIngredientsGroup = ({
-  title,
-  type,
-  ingredientsList,
-  handleClick,
+  title = "",
+  type = TABS_TYPES,
+  ingredientsList = [],
+  handleClick = () => {},
 }) => {
   // используемые булочки
   const usedBuns = useSelector((store) => store.ingredients.burgerConstructor.bun)
@@ -54,13 +54,6 @@ export const BurgerIngredientsGroup = ({
       <section className={cls.wrapper}>{ingredientsCards}</section>
     </div>
   )
-}
-
-BurgerIngredientsGroup.defaultProps = {
-  title: "",
-  type: TABS_TYPES,
-  ingredientsList: [],
-  handleClick: () => {},
 }
 
 BurgerIngredientsGroup.propTypes = {

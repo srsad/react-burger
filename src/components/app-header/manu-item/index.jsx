@@ -3,7 +3,12 @@ import { useMemo } from "react"
 
 import menuItemStyles from "./style.module.css"
 
-export const MenuItem = ({ text, Icon, isActive, customClassName }) => {
+export const MenuItem = ({
+  text = "",
+  Icon,
+  isActive = false,
+  customClassName = "",
+}) => {
   const iconType = useMemo(() => {
     return isActive ? "primary" : "secondary"
   }, [isActive])
@@ -21,12 +26,6 @@ export const MenuItem = ({ text, Icon, isActive, customClassName }) => {
       <span className="ml-2">{text}</span>
     </a>
   )
-}
-
-MenuItem.defaultProps = {
-  text: "",
-  isActive: false,
-  customClassName: "",
 }
 
 MenuItem.propTypes = {

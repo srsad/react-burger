@@ -11,7 +11,7 @@ import { DND_TYPES } from "../../../shared/common"
 
 import cls from './style.module.css'
 
-export const BurgerConstructorItem = ({ agregateIngridient, index }) => {
+export const BurgerConstructorItem = ({ agregateIngredient, index }) => {
   const dispatch = useDispatch()
 
   const itemRef = useRef(null)
@@ -41,7 +41,7 @@ export const BurgerConstructorItem = ({ agregateIngridient, index }) => {
 
   const [{ isDragging }, dragRef] = useDrag({
     type: DND_TYPES.DRAG_IN_CONSTRUCTOR,
-    item: { id: agregateIngridient._id, index },
+    item: { id: agregateIngredient._id, index },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
@@ -61,16 +61,16 @@ export const BurgerConstructorItem = ({ agregateIngridient, index }) => {
     >
       <DragIcon type="primary" />
       <ConstructorElement
-        text={agregateIngridient.name}
-        price={agregateIngridient.price}
-        thumbnail={agregateIngridient.image}
-        handleClose={() => dispatch(removeIngredientItem(agregateIngridient.uuid))}
+        text={agregateIngredient.name}
+        price={agregateIngredient.price}
+        thumbnail={agregateIngredient.image}
+        handleClose={() => dispatch(removeIngredientItem(agregateIngredient.uuid))}
       />
     </div>
   )
 }
 
 BurgerConstructorItem.propTypes = {
-  agregateIngridient: ingredientShapeAgregate.isRequired,
+  agregateIngredient: ingredientShapeAgregate.isRequired,
   index: PropTypes.number.isRequired,
 }

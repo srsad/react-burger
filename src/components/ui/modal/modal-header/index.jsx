@@ -3,7 +3,10 @@ import PropTypes from "prop-types"
 
 import cls from "./style.module.css"
 
-export const ModalHeader = ({ title, onClose }) => {
+export const ModalHeader = ({
+  title = "",
+  onClose = () => {},
+}) => {
   return (
     <div className={cls.header}>
       <h3 className={`${cls.title} pt-4 pb-4 text text_type_main-large`}>
@@ -17,12 +20,7 @@ export const ModalHeader = ({ title, onClose }) => {
   )
 }
 
-ModalHeader.defaultProps = {
-  titlle: "",
-  onClose: () => {},
-}
-
 ModalHeader.propTypes = {
-  titlle: PropTypes.string.isRequired,
+  titlle: PropTypes.string,
   onClose: PropTypes.func.isRequired,
 }

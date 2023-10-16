@@ -44,7 +44,7 @@ export const BurgerConstructorList = () => {
 
   const otherTopingsList = otherTopings.map((el, index) => (
     <BurgerConstructorItem
-      agregateIngridient={el}
+      agregateIngredient={el}
       index={index}
       key={el.uuid}
     />

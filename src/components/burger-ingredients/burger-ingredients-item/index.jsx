@@ -24,31 +24,31 @@ export const BurgerIngredientsItem = ({ ingredient, count, handleClick }) => {
   }
 
   return (
-    <div
+    <figure
       className={`${cls.item} mt-6`}
       onClick={() => handleClick(ingredient)}
       ref={ingredientDragRef}
       style={dragStyle}
     >
-      <section className={cls.image}>
-        <img src={ingredient.image} alt={ingredient.name} />
-      </section>
+      <img className={cls.image} src={ingredient.image} alt={ingredient.name} />
 
-      <section className={cls.price}>
-        <p className="text text_type_digits-default mr-2">{ingredient.price}</p>
-        <CurrencyIcon type="primary" />
-      </section>
+      <figcaption>
+        <p className={`${cls.price} text text_type_digits-default mr-2`}>
+          {ingredient.price}
+          <CurrencyIcon type="primary" />
+        </p>
 
-      <p className={`${cls.name} text text_type_main-default`}>
-        {ingredient.name}
-      </p>
+        <p className={`${cls.name} text text_type_main-default`}>
+          {ingredient.name}
+        </p>
 
-      {!!count && (
-        <section className={cls.count}>
-          <Counter count={count} size="default" />
-        </section>
-      )}
-    </div>
+        {!!count && (
+          <p className={cls.count}>
+            <Counter count={count} size="default" />
+          </p>
+        )}
+      </figcaption>
+    </figure>
   )
 }
 

@@ -10,7 +10,11 @@ import cls from "./style.module.css"
 const modalCcontaner = document.getElementById("modal-contaner")
 const bodyTag = document.querySelector("body")
 
-export const Modal = ({ onClose, titlle, children }) => {
+export const Modal = ({
+  titlle = "",
+  onClose = () => { },
+  children,
+}) => {
   useEffect(() => {
     document.addEventListener("keyup", escHandler)
     bodyTag.setAttribute("style", "overflow: hidden")
@@ -38,11 +42,6 @@ export const Modal = ({ onClose, titlle, children }) => {
   )
 
   return createPortal(modal, modalCcontaner)
-}
-
-Modal.defaultProps = {
-  titlle: "",
-  onClose: () => {},
 }
 
 Modal.propTypes = {
