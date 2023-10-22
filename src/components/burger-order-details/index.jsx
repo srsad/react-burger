@@ -1,18 +1,16 @@
-import { useContext } from "react"
-
-import { OrderContext } from "../../services/orderContext"
+import { useSelector } from 'react-redux'
 
 import cls from "./style.module.css"
 
 export const OrderDetails = () => {
-  const [orderParams] = useContext(OrderContext)
+  const orderNumber = useSelector(state => state.order.order.number)
 
   return (
     <div className={cls.order}>
       <p
-        className={`${cls.orderNumber} text text_type_digits-large text-center`}
+      className={`${cls.orderNumber} text text_type_digits-large text-center`}
       >
-        {orderParams.order.number}
+        {orderNumber}
       </p>
 
       <p className={`${cls.orderNumberDescription} text text_type_main-medium`}>

@@ -1,25 +1,30 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components"
-import PropTypes from "prop-types"
-import { useContext, useMemo, useState } from "react"
+import { useState, useMemo } from "react"
+import { useSelector, useDispatch } from 'react-redux'
 
 import { OrderDetails } from "../burger-order-details"
 import { Modal } from "../ui/modal"
 import { BurgerConstructorAmount } from "./burger-constructor-amount"
 import { BurgerConstructorList } from "./burger-constructor-list"
 
+import { createOrder } from "../../services/actions/order"
+
 import cls from "./style.module.css"
 
-import { ErrorContext } from "../../services/errorContext"
-import { OrderContext } from "../../services/orderContext"
+export const BurgerConstructor = () => {
+  const errorMessage = useSelector(state => state.errorMessage)
+  const selectIngredients = useSelector((store) => store.ingredients.burgerConstructor.items)
+  const selectBun = useSelector((store) => store.ingredients.burgerConstructor.bun)
 
-import { $api } from "../../api"
-import { checkReponse } from "../../utils/common"
+  const ingredientsList = useMemo(() => {
+    const result = [...selectIngredients]
+    if (selectBun) {
+      result.push(selectBun)
+    }
+    return result
+  }, [selectBun, selectIngredients])
 
-import { ingredientShape } from "../../types/common"
-
-export const BurgerConstructor = ({ ingredientsList = [] }) => {
-  const [_orderParams, setOrderParams] = useContext(OrderContext)
-  const [_errorNotification, setErrorNotification] = useContext(ErrorContext)
+  const dispatch = useDispatch()
 
   /**
    * Детальное окно заказа
@@ -40,19 +45,11 @@ export const BurgerConstructor = ({ ingredientsList = [] }) => {
 
   async function orderHandler() {
     setLoading(true)
-
-    try {
-      const response = await $api.orders.createOrder(ingredientsIds)
-      const result = await checkReponse(response)
-      setOrderParams(result)
+    await dispatch(createOrder(ingredientsIds))
+    if (!errorMessage) {
       setShowModal(true)
-    } catch (error) {
-      const errorMessage = "Не удалось создать заказ!"
-      console.error(errorMessage, error)
-      setErrorNotification(errorMessage)
-    } finally {
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return (
@@ -63,25 +60,25 @@ export const BurgerConstructor = ({ ingredientsList = [] }) => {
         </Modal>
       )}
 
-      <BurgerConstructorList ingredientsList={ingredientsList} />
+      <BurgerConstructorList />
 
       <section className={cls.order}>
-        <BurgerConstructorAmount totalAmount={totalAmount} />
+        {!!totalAmount && (
+          <>
+            <BurgerConstructorAmount totalAmount={totalAmount} />
 
-        <Button
-          size="large"
-          type="primary"
-          htmlType="button"
-          disabled={loading}
-          onClick={orderHandler}
-        >
-          Оформить заказ
-        </Button>
+            <Button
+              size="large"
+              type="primary"
+              htmlType="button"
+              disabled={loading}
+              onClick={orderHandler}
+            >
+              Оформить заказ
+            </Button>
+          </>
+        )}
       </section>
     </div>
   )
-}
-
-BurgerConstructor.propTypes = {
-  ingredientsList: PropTypes.arrayOf(ingredientShape).isRequired,
 }

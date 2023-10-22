@@ -6,6 +6,7 @@
   cursor: pointer;
   height: 208px;
   width: 242px;
+  margin: 0;
   padding-left: 16px;
 }
 
@@ -17,7 +18,9 @@
 .price {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 40px;
+  gap: 8px;
 }
 
 .name {

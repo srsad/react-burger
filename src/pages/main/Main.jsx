@@ -1,53 +1,33 @@
-import { useEffect, useState } from "react"
-
-import { $api } from "../../api"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from 'react-redux'
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"
 
 import { AppHeader } from "../../components/app-header"
-import { BurgerConstructor } from "../../components/burger-constructor"
 import { BurgerIngredients } from "../../components/burger-ingredients"
+import { BurgerConstructor } from "../../components/burger-constructor"
 import { ErrorNotificationDetails } from "../../components/error-notification-details"
-import { checkReponse } from "../../utils/common"
-
-import { ErrorContext } from "../../services/errorContext"
-import { IngredientContext } from "../../services/ingredientContext"
-import { OrderContext } from "../../services/orderContext"
 
 import cls from "./style.module.css"
 
-const Main = () => {
-  const ingredientsState = useState([])
-  const orderState = useState([])
-  const [ingredients, setIngredients] = ingredientsState
+import { fetchIngredientsList } from '../../services/actions/ingredients'
+import { cleanError } from '../../services/reducers/errorSlice'
 
-  const errorState = useState("")
-  const [errorNotification, setErrorNotification] = errorState
-  const [loading, setLoading] = useState(true)
+const Main = () => {
+  const errorNotification = useSelector((state) => state.errors.errorMessage)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    getIngredients()
-  }, [])
-
-  async function getIngredients() {
-    setLoading(true)
-    try {
-      const response = await $api.ingredients.getIngredients()
-      const { data } = await checkReponse(response)
-      setIngredients(data)
-    } catch (error) {
-      const errorMessage = "Не удалось получить список ингредиентов!"
-      console.error(errorMessage, error)
-      setErrorNotification(errorMessage)
-    } finally {
-      setLoading(false)
-    }
-  }
+    dispatch(fetchIngredientsList())
+  }, [dispatch])
 
   return (
     <div className={cls.main}>
       {!!errorNotification && (
         <ErrorNotificationDetails
           errorText={errorNotification}
-          onClose={() => setErrorNotification("")}
+          onClose={() => dispatch(cleanError())}
         />
       )}
 
@@ -59,15 +39,11 @@ const Main = () => {
         </h1>
 
         <section className={cls.constructor}>
-          <ErrorContext.Provider value={errorState}>
-            <IngredientContext.Provider value={ingredientsState}>
-              <BurgerIngredients loading={loading} />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
 
-              <OrderContext.Provider value={orderState}>
-                <BurgerConstructor ingredientsList={ingredients} />
-              </OrderContext.Provider>
-            </IngredientContext.Provider>
-          </ErrorContext.Provider>
+            <BurgerConstructor />
+          </DndProvider>
         </section>
       </section>
     </div>

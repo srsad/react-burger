@@ -6,7 +6,10 @@ import cls from "./style.module.css"
 
 const TIME_TO_CLOSE = 7000
 
-export const ErrorNotificationDetails = ({ errorText, onClose }) => {
+export const ErrorNotificationDetails = ({ 
+  errorText = "",
+  onClose = () => {},
+}) => {
   useEffect(() => {
     const timer = setTimeout(onClose, TIME_TO_CLOSE)
 
@@ -20,11 +23,6 @@ export const ErrorNotificationDetails = ({ errorText, onClose }) => {
       <p className={`${cls.error} text text_type_main-default`}>{errorText}</p>
     </Modal>
   )
-}
-
-ErrorNotificationDetails.defaultProps = {
-  errorText: "",
-  onClose: () => {},
 }
 
 ErrorNotificationDetails.propTypes = {

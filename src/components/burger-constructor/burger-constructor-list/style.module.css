@@ -16,9 +16,22 @@
   margin-left: 48px;
 }
 
-.element {
-  display: flex;
-  margin-left: 8px;
+.emptyConstructorFragment {
+  background: var(--background-element);
+  border-radius: var(--common-border-radius-s);
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
+  padding: 16px 24px;
+  width: 488px;
+  min-height: 48px;
+  margin-left: 48px;
+}
+
+.emptyConstructorFragmentTop {
+  border-radius: var(--top-constructor-item-border-radius);
+}
+
+.emptyConstructorFragmentBottom {
+  border-radius: var(--bottom-constructor-item-border-radius);
 }
