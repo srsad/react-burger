@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import { login } from "../../services/actions/auth"
+import { useForm } from "../../hooks/useForm"
 
 import { APP_PATH } from '../../shared/common'
 
@@ -20,14 +21,7 @@ export const Login = () => {
     password: ''
   }
 
-  const [form, setForm] = useState(defaultForm)
-
-  const handleChange = (e) =>{
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
+  const { values: form, handleChange, setValues: setForm } = useForm(defaultForm)
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { ProfileSidebarItem } from './profile-sidebar-item'
 import { logout } from '../../../services/actions/auth'
@@ -9,8 +8,6 @@ import cls from './style.module.css'
 
 export const ProfileSidebar = () => {
   const dispatch = useDispatch()
-
-  const hasError = useSelector(state => !!state.errors.errorMessage)
 
   const navItems = [{
     title: 'Профиль',
@@ -22,10 +19,6 @@ export const ProfileSidebar = () => {
 
   async function logountHandler() {
     await dispatch(logout())
-
-    if (!hasError) {
-      Navigate(APP_PATH.MAIN)
-    }
   }
 
   return (

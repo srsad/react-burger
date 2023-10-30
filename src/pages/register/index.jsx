@@ -6,6 +6,7 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { register } from "../../services/actions/auth"
 
 import { APP_PATH } from '../../shared/common'
+import { useForm } from '../../hooks/useForm'
 
 export const Register = () => {
   const dispatch = useDispatch()
@@ -19,16 +20,9 @@ export const Register = () => {
     password: ''
   }
 
-  const [form, setForm] = useState(defaultForm)
+  const { values: form, handleChange, setValues: setForm } = useForm(defaultForm)
 
   const [loading, setLoading] = useState(false)
-
-  const handleChange = (e) =>{
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()

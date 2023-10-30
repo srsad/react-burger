@@ -36,7 +36,7 @@ export default function ingredients(api) {
     /**
      * Восстановление пароля
      */
-    forgotPassword(body) {
+    passwordReset(body) {
       return api("/api/password-reset/reset", {
         method: "POST",
         headers: { "Content-Type": "application/json;charset=utf-8" },

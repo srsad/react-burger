@@ -1,10 +1,10 @@
-import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { resetPassword } from "../../services/actions/auth"
+import { passwordReset } from "../../services/actions/auth"
 import { APP_PATH } from '../../shared/common'
+import { useForm } from '../../hooks/useForm'
 
 export const ResetPassword = () => {
   const dispatch = useDispatch()
@@ -12,21 +12,14 @@ export const ResetPassword = () => {
 
   const hasError = useSelector(state => !!state.errors.errorMessage)
 
-  const [form, setForm] = useState({
+  const { values: form, handleChange } = useForm({
     password: '',
-    code: '',
+    token: '',
   })
-
-  const handleChange = (e) =>{
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(resetPassword(form))
+    dispatch(passwordReset(form))
 
     if (!hasError) {
       navigate(APP_PATH.LOGIN)
@@ -48,8 +41,8 @@ export const ResetPassword = () => {
         <Input
           type="text"
           placeholder="Введите код из письма"
-          name="code"
-          value={form.code}
+          name="token"
+          value={form.token}
           onChange={handleChange}
         />
 

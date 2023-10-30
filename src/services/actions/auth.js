@@ -31,9 +31,9 @@ export const logout = () => async (dispatch) => {
   }
 }
 
-export const forgotPassword = (params) => async (dispatch) => {
+export const passwordReset = (params) => async (dispatch) => {
   try {
-    await $api.auth.forgotPassword(params)
+    await $api.auth.passwordReset(params)
   } catch (error) {
     const errorMessage = error?.message ?? "Не уалось восстановить пароль"
     dispatch(errorSlice.actions.setError(errorMessage))

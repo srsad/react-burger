@@ -1,10 +1,10 @@
-import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { resetPassword } from "../../services/actions/auth"
 import { APP_PATH } from '../../shared/common'
+import { useForm } from '../../hooks/useForm'
 
 export const ForgotPassword = () => {
   const dispatch = useDispatch()
@@ -12,16 +12,9 @@ export const ForgotPassword = () => {
 
   const hasError = useSelector(state => !!state.errors.errorMessage)
 
-  const [form, setForm] = useState({
+  const { values: form, handleChange } = useForm({
     email: '',
   })
-
-  const handleChange = (e) =>{
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
