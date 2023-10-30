@@ -6,8 +6,6 @@ import {
   TABS_TYPES,
   TABS_TYPES_LOCALE,
 } from "../../shared/common"
-import { IngredientDetails } from "../burger-ingredient-details"
-import { Modal } from "../ui/modal"
 import { BurgerIngredientsGroup } from "./burger-ingredients-group"
 import { BurgerIngredientsTabs } from "./burger-ingredients-tabs"
 
@@ -38,23 +36,16 @@ const ingredientStatus = ({ title }) => (
 )
 
 export const BurgerIngredients = () => {
+  const dispatch = useDispatch()
+
   const ingredientsList = useSelector((store) => store.ingredients.ingredientsList)
   const loading = useSelector((store) => store.ingredients.loading)
-  const dispatch = useDispatch()
 
   /**
    * Детальное окно ингредиента
    */
-  const [showModal, setShowModal] = useState(false)
-
   function clickToIngredient(ingredient) {
     dispatch(setIngredientDetatl(ingredient))
-    setShowModal(true)
-  }
-
-  function closeModal() {
-    dispatch(setIngredientDetatl(null))
-    setShowModal(false)
   }
 
   /**
@@ -110,12 +101,6 @@ export const BurgerIngredients = () => {
 
   return (
     <div>
-      {showModal && (
-        <Modal onClose={closeModal} titlle="Детали ингредиента">
-          <IngredientDetails />
-        </Modal>
-      )}
-
       <BurgerIngredientsTabs
         activeTabItem={activeTab}
         callback={changeActiveTab}

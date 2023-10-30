@@ -1,6 +1,7 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState, useMemo } from "react"
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom"
 
 import { OrderDetails } from "../burger-order-details"
 import { Modal } from "../ui/modal"
@@ -9,12 +10,16 @@ import { BurgerConstructorList } from "./burger-constructor-list"
 
 import { createOrder } from "../../services/actions/order"
 
+import { APP_PATH } from "../../shared/common"
 import cls from "./style.module.css"
 
 export const BurgerConstructor = () => {
+  const navigate = useNavigate()
+
   const errorMessage = useSelector(state => state.errorMessage)
   const selectIngredients = useSelector((store) => store.ingredients.burgerConstructor.items)
   const selectBun = useSelector((store) => store.ingredients.burgerConstructor.bun)
+  const hasAuth = useSelector((store) => store.auth.name && store.auth.email)
 
   const ingredientsList = useMemo(() => {
     const result = [...selectIngredients]
@@ -43,7 +48,14 @@ export const BurgerConstructor = () => {
     return ingredientsList.map((el) => el._id)
   }, [ingredientsList])
 
+  /**
+   * Оформление заказа
+   */
   async function orderHandler() {
+    if (!hasAuth) {
+      navigate(APP_PATH.LOGIN)
+    }
+
     setLoading(true)
     await dispatch(createOrder(ingredientsIds))
     if (!errorMessage) {
