@@ -1,3 +1,8 @@
+.wrapper {
+  text-decoration: none;
+  color: var(--text-primary-color);
+}
+
 .item {
   display: flex;
   flex-direction: column;

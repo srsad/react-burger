@@ -23,3 +23,8 @@ export const initialStateError = {
   // сообщение об ошибке
   errorMessage: '',
 }
+
+export const initialStateAuth = {
+  name: '',
+  email: '',
+} 

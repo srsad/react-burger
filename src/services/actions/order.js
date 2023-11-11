@@ -1,5 +1,4 @@
 import { $api } from '../../api'
-import { checkReponse } from "../../utils/common"
 
 import { orderSlice } from "../reducers/orderSlice"
 import { errorSlice } from "../reducers/errorSlice"
@@ -8,8 +7,7 @@ import { errorSlice } from "../reducers/errorSlice"
 export const createOrder = (ingredientsIds) => async (dispatch) => {
   try {
     const response = await $api.orders.createOrder(ingredientsIds)
-    const result = await checkReponse(response)
-    dispatch(orderSlice.actions.setOrder(result))
+    dispatch(orderSlice.actions.setOrder(response))
   } catch (error) {
     const errorMessage = "Не удалось создать заказ"
     dispatch(errorSlice.actions.setError(errorMessage))

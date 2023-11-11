@@ -1,5 +1,4 @@
 import { $api } from '../../api'
-import { checkReponse } from "../../utils/common"
 
 import { ingredientsSlice } from "../reducers/ingredientsSlice"
 import { errorSlice } from "../reducers/errorSlice"
@@ -12,8 +11,7 @@ export const fetchIngredientsList = () => async (dispatch) => {
   dispatch(ingredientsSlice.actions.setLoading(true))
 
   try {
-    const response = await $api.ingredients.getIngredients()
-    const { data } = await checkReponse(response)
+    const { data } = await $api.ingredients.getIngredients()
     dispatch(ingredientsSlice.actions.setIngredientsList(data))
   } catch (error) {
     const errorMessage = "Не уалось получить список ингридиентов"

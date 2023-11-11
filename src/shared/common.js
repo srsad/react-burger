@@ -20,3 +20,22 @@ export const INGREDIENT_SECTION_IDS = {
   [TABS_TYPES.SAUCE]: `ingredient-section_${[TABS_TYPES.SAUCE]}`,
   [TABS_TYPES.MAIN]: `ingredient-section_${[TABS_TYPES.MAIN]}`,
 }
+
+export const APP_PATH = {
+  MAIN: '/',
+
+  PROFILE: '/profile',
+  ORDERS: '/profile/orders',
+  ORDER: '/profile/orders/:id',
+
+  INGREDIENTS_ID: '/ingredients/:id',
+
+  LOGIN: '/login',
+  LOGOUT: '/logout',  
+
+  REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+
+  PAGE_NOT_FOUND_404: '*',
+}

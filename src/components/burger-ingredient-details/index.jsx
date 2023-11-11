@@ -1,9 +1,30 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { useParams } from "react-router-dom"
 
 import cls from "./style.module.css"
+import { setIngredientDetatl } from "../../services/reducers/ingredientsSlice"
 
 export const IngredientDetails = () => {
+  const dispatch = useDispatch()
   const ingredient = useSelector(state => state.ingredients.ingredientDetatl)
+  const ingredientsList = useSelector(state => state.ingredients.ingredientsList)
+  const { id } = useParams()
+
+  useEffect(() => {
+    if (!ingredient) {
+      const selectIngredient = ingredientsList.find(el => el._id === id)
+      dispatch(setIngredientDetatl(selectIngredient))
+    }
+  }, [dispatch, ingredientsList, ingredient, id])
+
+  if (!ingredient) {
+    return (
+      <div className={cls.card}>
+        {/*  */}
+      </div>
+    )
+  }
 
   return (
     <div className={cls.card}>

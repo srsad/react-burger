@@ -1,14 +1,17 @@
 import PropTypes from "prop-types"
-import { useMemo } from "react"
+import { useState, useMemo } from "react"
+import { NavLink  } from 'react-router-dom'
 
 import menuItemStyles from "./style.module.css"
 
 export const MenuItem = ({
   text = "",
   Icon,
-  isActive = false,
   customClassName = "",
+  path = "/",
 }) => {
+  const [isActive, setIsActive] = useState(false)
+
   const iconType = useMemo(() => {
     return isActive ? "primary" : "secondary"
   }, [isActive])
@@ -18,18 +21,21 @@ export const MenuItem = ({
   }, [isActive])
 
   return (
-    <a
-      href="/"
+    <NavLink
+      to={path}
       className={`${menuItemStyles.menuItem} ${customClassName} ${activeClass}`}
+      style={({ isActive }) => setIsActive(isActive)}
     >
-      <Icon type={iconType} />
-      <span className="ml-2">{text}</span>
-    </a>
+      <>
+        <Icon type={iconType} />
+        <span className="ml-2">{text}</span>
+      </>
+    </NavLink>
   )
 }
 
 MenuItem.propTypes = {
   text: PropTypes.string,
-  isActive: PropTypes.bool,
   customClassName: PropTypes.string,
+  path: PropTypes.string,
 }

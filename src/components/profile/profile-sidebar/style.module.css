@@ -1,0 +1,26 @@
+.navigation {
+  width: 320px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 80px;
+}
+
+.item {
+  text-decoration: none;
+  color: #8585ad;
+  transition: all 0.3s ease;
+}
+
+.logout {
+  cursor: pointer;
+}
