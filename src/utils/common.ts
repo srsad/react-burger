@@ -4,9 +4,9 @@ interface ISetCookieProps {
 }
 
 /**
- * Функция устанавливает куки в браузере.
+ * Функция рабоыт с куками
  */
-export function setCookie(name: string, value: string, props: ISetCookieProps = {}): void {
+export function setCookie(name: string, value: string, props: ISetCookieProps = {}) {
   props = {
     path: "/",
     ...props,

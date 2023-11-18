@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react"
-import type { PropsWithChildren, ComponentType } from "react"
+import type { FC, ComponentType } from "react"
 import { NavLink  } from 'react-router-dom'
 import { TIconProps } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils"
 
@@ -12,12 +12,12 @@ type TProps = {
   path?: string,
 }
 
-export const MenuItem = ({
+export const MenuItem: FC<TProps> = ({
   text = "",
   Icon,
   customClassName = "",
   path = "/",
-}: PropsWithChildren<TProps>) => {
+}) => {
   const [isActive, setIsActive] = useState<boolean>(false)
 
   const iconType = useMemo<"primary" | "secondary">(() => {

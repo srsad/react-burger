@@ -12,7 +12,6 @@ import { TIngredientAgregate } from "../../../types/common"
 import cls from "./style.module.css"
 
 // Пустой фрагмент конструктора
-// типизировать ответ
 type TConstructorFragmentPosition = 'emptyConstructorFragmentTop' | 'emptyConstructorFragmentBottom' | ''
 type TEmptyConstructorFragmentProps = {
   text?: string,

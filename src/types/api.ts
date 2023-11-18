@@ -32,9 +32,11 @@ export type TOrderReques = {
   ingredients: string[]
 }
 
-// TODO: добить
 export type TOrderResponse = TServerResponse<{
-  data: TIngredient[]
+  name: string,
+  order: {
+    number: number,
+  },
 }>
 
 // auth

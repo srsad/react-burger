@@ -19,7 +19,6 @@ import { TIngredient, TIngredientTypes } from '../../types/common'
  * Группировка данных по - type
  */
 function groupByType(data: TIngredient[]) {
-  // типизировтаь этот объект
   const grouped: { [key in TIngredientTypes]: TIngredient[] } = {
     bun: [],
     main: [],
