@@ -18,28 +18,15 @@ export const MenuItem: FC<TProps> = ({
   customClassName = "",
   path = "/",
 }) => {
-  const [isActive, setIsActive] = useState<boolean>(false)
-
-  const iconType = useMemo<"primary" | "secondary">(() => {
-    return isActive ? "primary" : "secondary"
-  }, [isActive])
-
-  const activeClass = useMemo<string>(() => {
-    return isActive ? menuItemStyles.menuItem_active : ""
-  }, [isActive])
-
-  function checkActive(isActive: boolean): string {
-    setIsActive(isActive)
-    return `${menuItemStyles.menuItem} ${customClassName} ${activeClass}`
-  }
-
   return (
     <NavLink
       to={path}
-      className={({ isActive }) => checkActive(isActive)}
+      className={({isActive}) =>
+        `${menuItemStyles.menuItem} ${customClassName} ` + (isActive ? menuItemStyles.menuItem_active : "")
+      }
     >
       <>
-        <Icon type={iconType} />
+        <Icon type="secondary" />
         <span className="ml-2">{text}</span>
       </>
     </NavLink>

@@ -1,4 +1,4 @@
-import type { FC, SyntheticEvent } from "react"
+import type { FC, FormEvent } from "react"
 import { Link, useNavigate, type NavigateFunction } from "react-router-dom"
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useDispatch, useSelector } from "react-redux"
@@ -17,7 +17,7 @@ export const ForgotPassword: FC = () => {
     email: '',
   })
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // @ts-ignore

@@ -54,9 +54,9 @@ export const BurgerIngredientsItem: FC<TProps> = ({ ingredient, count, handleCli
           </p>
 
           {!!count && (
-            <p className={cls.count}>
+            <div className={cls.count}>
               <Counter count={count} size="default" />
-            </p>
+            </div>
           )}
         </figcaption>
       </figure>

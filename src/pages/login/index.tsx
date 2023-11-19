@@ -1,4 +1,4 @@
-import type { FC, SyntheticEvent } from "react"
+import type { FC, FormEvent } from "react"
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, type NavigateFunction } from 'react-router-dom'
@@ -24,7 +24,7 @@ export const Login: FC = () => {
 
   const { values: form, handleChange, setValues: setForm } = useForm(defaultForm)
 
-  const handleSubmit = async (e: SyntheticEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(false)
     // @ts-ignore
