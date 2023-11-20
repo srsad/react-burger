@@ -18,6 +18,7 @@ export const {
   moveIngredientItem,
   removeIngredientItem,
   cleanIngredientItems,
+  cleanIngredientBun,
 
   setIngredientBun,
   removeIngredientBun,

@@ -57,6 +57,10 @@ export const removeIngredientItem = (state, action) => {
   state.burgerConstructor.items = state.burgerConstructor.items.filter(el => el.uuid !== action.payload)
 }
 
+export const cleanIngredientBun = (state) => {
+  state.burgerConstructor.bun = null
+}
+
 export const cleanIngredientItems = (state) => {
   state.burgerConstructor.items = []
 }
