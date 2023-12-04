@@ -52,7 +52,7 @@ export const DetailOrder: FC<TProps> = ({ fullPage = true }) => {
       return []
     }
 
-    return ingredientsFiltredList.map((el: TIngredient) => {
+    return ingredientsFiltredList.map((el) => {
       const res: TIngredientAggregate = {
         ...el,
         count: detailOrder.ingredients.filter(itemId => itemId === el._id).length

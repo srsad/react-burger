@@ -54,7 +54,7 @@ export const BurgerConstructorList = () => {
     dispatch(setIngredientItem(item))
   }
 
-  const otherTopingsList = otherTopings.map((el: TIngredientAgregate, index: number) => (
+  const otherTopingsList = otherTopings.map((el, index: number) => (
     <BurgerConstructorItem
       agregateIngredient={el}
       index={index}

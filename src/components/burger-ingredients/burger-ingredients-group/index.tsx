@@ -29,7 +29,7 @@ export const BurgerIngredientsGroup: FC<TProps> = ({
   // используемое все остольное
   const usedOtherTopings = useAppSelector((store) => store.ingredients.burgerConstructor.items)
 
-  const ingredientsCards = ingredientsList.map((ingredient: TIngredient) => (
+  const ingredientsCards = ingredientsList.map((ingredient) => (
     <BurgerIngredientsItem
       ingredient={ingredient}
       count={getIngredientCount(ingredient)}
@@ -49,7 +49,7 @@ export const BurgerIngredientsGroup: FC<TProps> = ({
     }
 
     if (usedOtherTopings.length) {
-      result = usedOtherTopings.filter((el: TIngredient) => el._id === ingredient._id).length
+      result = usedOtherTopings.filter((el) => el._id === ingredient._id).length
     }
   
     return result

@@ -48,7 +48,7 @@ export const BurgerConstructor: FC = () => {
   }, [ingredientsList])
 
   const ingredientsIds = useMemo<string[]>(() => {
-    return ingredientsList.map((el: TIngredient) => el._id)
+    return ingredientsList.map((el) => el._id)
   }, [ingredientsList])
 
   /**
@@ -57,6 +57,7 @@ export const BurgerConstructor: FC = () => {
   async function orderHandler() {
     if (!hasAuth) {
       navigate(APP_PATH.LOGIN)
+      return
     }
 
     setLoading(true)
