@@ -2,10 +2,11 @@
 import { Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import type { FC, ReactNode } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
 import { getUserData } from '../../services/actions/auth'
 import { APP_PATH } from '../../shared/common'
+
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
 
 type TProps = {
   element: ReactNode,
@@ -13,14 +14,13 @@ type TProps = {
 }
 
 export const ProtectedRouteElement: FC<TProps> = ({ element, notAuth = false }) => {
-  const dispath = useDispatch()
+  const dispath = useAppDispatch()
 
-  const hasAuth = useSelector((store: any) => store.auth.name && store.auth.email)
+  const hasAuth = useAppSelector((store) => store.auth.name && store.auth.email)
   const [isUserLoaded, setUserLoaded] = useState<boolean>(false);
 
   const init = async () => {
     if (!hasAuth) {
-      // @ts-ignore
       await dispath(getUserData())
     }
     

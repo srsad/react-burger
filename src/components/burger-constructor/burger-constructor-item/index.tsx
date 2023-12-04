@@ -1,7 +1,6 @@
 import { useRef, FC } from 'react'
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useDrag, useDrop, DragSourceMonitor } from 'react-dnd'
-import { useDispatch } from 'react-redux'
 
 import { removeIngredientItem, moveIngredientItem } from '../../../services/reducers/ingredientsSlice'
 import { DND_TYPES } from "../../../shared/common"
@@ -9,6 +8,7 @@ import { TIngredientAgregate } from "../../../types/common"
 
 import cls from './style.module.css'
 
+import { useAppDispatch } from '../../../hooks/useStore'
 
 type TProps = {
   agregateIngredient: TIngredientAgregate,
@@ -26,7 +26,7 @@ type TPosition = {
 }
 
 export const BurgerConstructorItem: FC<TProps> = ({ agregateIngredient, index }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const itemRef = useRef<HTMLDivElement>(null)
 

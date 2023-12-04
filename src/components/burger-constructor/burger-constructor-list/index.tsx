@@ -1,6 +1,5 @@
 import { FC } from "react"
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from "react-dnd"
 
 import { BurgerConstructorItem } from '../burger-constructor-item'
@@ -10,6 +9,8 @@ import { TABS_TYPES, DND_TYPES } from "../../../shared/common"
 import { TIngredientAgregate } from "../../../types/common"
 
 import cls from "./style.module.css"
+
+import { useAppDispatch, useAppSelector } from '../../../hooks/useStore'
 
 // Пустой фрагмент конструктора
 type TConstructorFragmentPosition = 'emptyConstructorFragmentTop' | 'emptyConstructorFragmentBottom' | ''
@@ -30,12 +31,12 @@ const emptyConstructorFragment: FC<TEmptyConstructorFragmentProps> = ({
 }
 
 export const BurgerConstructorList = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   // булочки
-  const buns = useSelector((store: any) => store.ingredients.burgerConstructor.bun)
+  const buns = useAppSelector((store) => store.ingredients.burgerConstructor.bun)
   // все остольное
-  const otherTopings = useSelector((store: any) => store.ingredients.burgerConstructor.items)
+  const otherTopings = useAppSelector((store) => store.ingredients.burgerConstructor.items)
 
   const [ , dropCntainerRef] = useDrop({
     accept: DND_TYPES.DROP_TYPES,

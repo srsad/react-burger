@@ -31,7 +31,7 @@ export const AppHeader: FC = () => {
               <MenuItem
                 text="Лента заказозв"
                 Icon={ListIcon}
-                path={APP_PATH.ORDERS}
+                path={APP_PATH.FEED}
               />
             </li>
           </ul>

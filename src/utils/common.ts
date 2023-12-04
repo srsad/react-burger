@@ -37,3 +37,5 @@ export function setCookie(name: string, value: string, props: ISetCookieProps = 
 
   document.cookie = updatedCookie
 }
+
+export const getCurrentTimestamp = (): number => new Date().getTime() / 1000

@@ -1,5 +1,4 @@
 import { type FC, useState } from "react"
-import { useSelector, useDispatch } from 'react-redux'
 
 import {
   INGREDIENT_SECTION_IDS,
@@ -14,6 +13,8 @@ import { setIngredientDetatl } from '../../services/reducers/ingredientsSlice'
 import cls from "./style.module.css"
 
 import { TIngredient, TIngredientTypes } from '../../types/common'
+
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
 
 /**
  * Группировка данных по - type
@@ -50,10 +51,10 @@ const ingredientStatus: FC<TPropsIngredientStatus> = ({ title }) => (
 )
 
 export const BurgerIngredients = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const ingredientsList = useSelector((store: any) => store.ingredients.ingredientsList)
-  const loading = useSelector((store: any) => store.ingredients.loading)
+  const ingredientsList = useAppSelector((store) => store.ingredients.ingredientsList)
+  const loading = useAppSelector((store) => store.ingredients.loading)
 
   /**
    * Детальное окно ингредиента

@@ -1,25 +1,26 @@
 import { useEffect, FC } from "react"
-import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import cls from "./style.module.css"
 import { setIngredientDetatl } from "../../services/reducers/ingredientsSlice"
 import { TIngredient } from "../../types/common"
 
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
+
 type TParams = {
   id: string
 }
 
 export const IngredientDetails: FC = () => {
-  const dispatch = useDispatch()
-  const ingredient = useSelector((state: any) => state.ingredients.ingredientDetatl)
-  const ingredientsList = useSelector((state: any) => state.ingredients.ingredientsList)
+  const dispatch = useAppDispatch()
+  const ingredient = useAppSelector((state) => state.ingredients.ingredientDetatl)
+  const ingredientsList = useAppSelector((state) => state.ingredients.ingredientsList)
   const { id } = useParams<TParams>()
 
   useEffect(() => {
     if (!ingredient) {
       const selectIngredient = ingredientsList.find((el: TIngredient) => el._id === id)
-      dispatch(setIngredientDetatl(selectIngredient))
+      dispatch(setIngredientDetatl(selectIngredient as TIngredient))
     }
   }, [dispatch, ingredientsList, ingredient, id])
 

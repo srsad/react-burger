@@ -1,17 +1,18 @@
 import type { FC, FormEvent } from "react"
 import { Link, useNavigate, type NavigateFunction } from "react-router-dom"
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useDispatch, useSelector } from "react-redux"
 
 import { resetPassword } from "../../services/actions/auth"
 import { APP_PATH } from '../../shared/common'
 import { useForm } from '../../hooks/useForm'
 
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
+
 export const ForgotPassword: FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate: NavigateFunction = useNavigate()
 
-  const hasError = useSelector((state: any) => !!state.errors.errorMessage)
+  const hasError = useAppSelector((state) => !!state.errors.errorMessage)
 
   const { values: form, handleChange } = useForm({
     email: '',
@@ -20,7 +21,6 @@ export const ForgotPassword: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // @ts-ignore
     dispatch(resetPassword(form))
 
     if (!hasError) {

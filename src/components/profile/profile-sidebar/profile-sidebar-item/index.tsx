@@ -1,9 +1,8 @@
 import type { FC } from "react"
 import { NavLink } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 import cls from "./style.module.css"
-
-import { } from "../../../../types/common"
 
 type TProps = {
   text: string,
@@ -11,10 +10,12 @@ type TProps = {
 }
 
 export const ProfileSidebarItem: FC<TProps> = ({ text, path }) => {
-  function getClasses(isActive: boolean): string {
+  const location = useLocation()
+
+  function getClasses(): string {
     let classList = cls.link + ' text text_color_inactive text_type_main-medium '
 
-    if (isActive) {
+    if (location.pathname === path) {
       classList += cls.active
     }
 
@@ -23,7 +24,7 @@ export const ProfileSidebarItem: FC<TProps> = ({ text, path }) => {
 
   return (
     <NavLink
-      className={({ isActive }) => getClasses(isActive)}
+      className={getClasses()}
       to={path}
     >
       {text}

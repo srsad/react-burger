@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
 
 import { BurgerIngredientsItem } from "../burger-ingredients-item"
 
@@ -7,6 +6,8 @@ import { INGREDIENT_SECTION_IDS, TABS_TYPES } from "../../../shared/common"
 import cls from "./style.module.css"
 
 import { IngredientTypes, TIngredient } from "../../../types/common"
+
+import { useAppSelector } from '../../../hooks/useStore'
 
 type TProps = {
   title?: string,
@@ -24,9 +25,9 @@ export const BurgerIngredientsGroup: FC<TProps> = ({
   handleClick = () => {},
 }) => {
   // используемые булочки
-  const usedBuns = useSelector((store: any) => store.ingredients.burgerConstructor.bun)
+  const usedBuns = useAppSelector((store) => store.ingredients.burgerConstructor.bun)
   // используемое все остольное
-  const usedOtherTopings = useSelector((store: any) => store.ingredients.burgerConstructor.items)
+  const usedOtherTopings = useAppSelector((store) => store.ingredients.burgerConstructor.items)
 
   const ingredientsCards = ingredientsList.map((ingredient: TIngredient) => (
     <BurgerIngredientsItem
