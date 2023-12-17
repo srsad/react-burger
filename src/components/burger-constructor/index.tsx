@@ -1,6 +1,5 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState, useMemo, FC } from "react"
-import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, type NavigateFunction } from "react-router-dom"
 
 import { OrderDetails } from "../burger-order-details"
@@ -15,13 +14,15 @@ import { TIngredient } from "../../types/common"
 import { APP_PATH } from "../../shared/common"
 import cls from "./style.module.css"
 
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
+
 export const BurgerConstructor: FC = () => {
   const navigate: NavigateFunction = useNavigate()
 
-  const errorMessage = useSelector((state: any) => state.errorMessage)
-  const selectIngredients = useSelector((store: any) => store.ingredients.burgerConstructor.items)
-  const selectBun = useSelector((store: any) => store.ingredients.burgerConstructor.bun)
-  const hasAuth = useSelector((store: any) => store.auth.name && store.auth.email)
+  const errorMessage = useAppSelector((state) => state.errors.errorMessage)
+  const selectIngredients = useAppSelector((store) => store.ingredients.burgerConstructor.items)
+  const selectBun = useAppSelector((store) => store.ingredients.burgerConstructor.bun)
+  const hasAuth = useAppSelector((store) => store.auth.name && store.auth.email)
 
   const ingredientsList = useMemo(() => {
     const result = [...selectIngredients]
@@ -31,7 +32,7 @@ export const BurgerConstructor: FC = () => {
     return result
   }, [selectBun, selectIngredients])
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   /**
    * Детальное окно заказа
@@ -47,7 +48,7 @@ export const BurgerConstructor: FC = () => {
   }, [ingredientsList])
 
   const ingredientsIds = useMemo<string[]>(() => {
-    return ingredientsList.map((el: TIngredient) => el._id)
+    return ingredientsList.map((el) => el._id)
   }, [ingredientsList])
 
   /**
@@ -56,10 +57,10 @@ export const BurgerConstructor: FC = () => {
   async function orderHandler() {
     if (!hasAuth) {
       navigate(APP_PATH.LOGIN)
+      return
     }
 
     setLoading(true)
-    // @ts-ignore
     await dispatch(createOrder(ingredientsIds))
     if (!errorMessage) {
       setShowModal(true)

@@ -6,7 +6,11 @@ import * as actions from '../actions/auth'
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: { ...actions },
+  reducers: {
+    setAuthData: actions.setAuthData,
+    setToken: actions.setToken,
+    removeToken: actions.removeToken,
+  },
 })
 
 export default authSlice.reducer

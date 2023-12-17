@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route, useLocation, useNavigate, Location, type NavigateFunction } from 'react-router-dom'
 
 import { AppHeader } from "../components/app-header"
@@ -10,6 +9,7 @@ import { Modal } from "../components/ui/modal"
 import { ProfileLayout } from "../layouts/profile"
 
 import { setIngredientDetatl } from '../services/reducers/ingredientsSlice'
+import { cleanDetailOrder } from '../services/reducers/orderSlice'
 
 import {
   Main,
@@ -18,6 +18,9 @@ import {
   ForgotPassword,
   ResetPassword,
   Profile,
+  ProfileOrders,
+  Feed,
+  DetailOrder,
   PageNotFound404,
 } from "../pages"
 
@@ -27,26 +30,26 @@ import { fetchIngredientsList } from '../services/actions/ingredients'
 import { getUserData } from '../services/actions/auth'
 import { cleanError } from '../services/reducers/errorSlice'
 
+import { useAppDispatch, useAppSelector } from '../hooks/useStore'
+
 import { APP_PATH } from '../shared/common'
 
 export default function App() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   let location = useLocation()
   const navigate: NavigateFunction = useNavigate()
 
   const state = location.state as { backgroundLocation?: Location }
 
-  const errorNotification = useSelector<any>((state) => state.errors.errorMessage)
-  const hasAuth = useSelector<any>((store) => store.auth.name && store.auth.email)
+  const errorNotification = useAppSelector((state) => state.errors.errorMessage)
+  const hasAuth = useAppSelector((store) => store.auth.name && store.auth.email)
 
   const [appLoaded, setAppLoaded] = useState<boolean>(false)
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchIngredientsList())
 
     if (!hasAuth) {
-      // @ts-ignore
       dispatch(getUserData())
     }
   }, [dispatch, hasAuth])
@@ -59,6 +62,11 @@ export default function App() {
   function closeIngredientModal() {
     dispatch(setIngredientDetatl(null))
     navigate(APP_PATH.MAIN)
+  }
+
+  function closeDetailOrder(path: string) {
+    dispatch(cleanDetailOrder())
+    navigate(path)
   }
 
   return (
@@ -93,18 +101,37 @@ export default function App() {
             <ProtectedRouteElement element={<ProfileLayout />} />
           }>
             <Route path={APP_PATH.PROFILE} element={<Profile />} />
-            <Route path={APP_PATH.ORDERS} element={<p>orders</p>} />
+            <Route path={APP_PATH.ORDERS} element={<ProfileOrders />} />
           </Route>
+
+          <Route path={APP_PATH.ORDER} element={
+            <ProtectedRouteElement element={<DetailOrder />} />
+          } />
+
+          <Route path={APP_PATH.FEED} element={<Feed />} />
+          <Route path={APP_PATH.FEED_ID} element={<DetailOrder />} />
 
           <Route path={APP_PATH.PAGE_NOT_FOUND_404} element={<PageNotFound404 />} />
         </Routes>
       </section>
-      
+
       {(state?.backgroundLocation && appLoaded) && (
         <Routes>
           <Route path={APP_PATH.INGREDIENTS_ID} element={(
             <Modal onClose={closeIngredientModal} titlle="Детали ингредиента">
               <IngredientDetails />
+            </Modal>
+          )} />
+
+          <Route path={APP_PATH.FEED_ID} element={(
+            <Modal onClose={() => closeDetailOrder(APP_PATH.FEED)} titlle="">
+              <DetailOrder fullPage={false} />
+            </Modal>
+          )} />
+
+          <Route path={APP_PATH.ORDER} element={(
+            <Modal onClose={() => closeDetailOrder(APP_PATH.ORDERS)} titlle="">
+              <DetailOrder fullPage={false} />
             </Modal>
           )} />
         </Routes>

@@ -6,10 +6,23 @@ import * as actions from '../actions/ingredients'
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: { ...actions },
+  reducers: {
+    cleanIngredientBun: actions.cleanIngredientBun,
+    cleanIngredientDetatl: actions.cleanIngredientDetatl,
+    cleanIngredientItems: actions.cleanIngredientItems,
+    moveIngredientItem: actions.moveIngredientItem,
+    removeIngredientItem: actions.removeIngredientItem,
+    setIngredientBun: actions.setIngredientBun,
+    removeIngredientBun: actions.setIngredientBun,
+    setIngredientDetatl: actions.setIngredientDetatl,
+    setIngredientItem: actions.setIngredientItem,
+    setIngredientsList: actions.setIngredientsList,
+    setLoading: actions.setLoading,
+  },
 })
 
 export default ingredientsSlice.reducer
+
 export const {
   setIngredientDetatl,
   cleanIngredientDetatl,

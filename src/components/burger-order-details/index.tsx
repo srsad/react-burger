@@ -1,10 +1,11 @@
 import { type FC } from "react"
-import { useSelector } from "react-redux"
 
 import cls from "./style.module.css"
 
+import { useAppSelector } from '../../hooks/useStore'
+
 export const OrderDetails: FC = () => {
-  const orderNumber = useSelector((state: any) => state.order.order.number)
+  const orderNumber = useAppSelector((state) => state.order.order.number)
 
   return (
     <div className={cls.order}>

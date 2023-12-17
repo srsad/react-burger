@@ -1,16 +1,18 @@
 import { useState, useEffect, useMemo, ChangeEvent } from 'react'
 import type { FC } from 'react'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector, useDispatch } from 'react-redux'
 
 import { setUserData } from '../../../services/actions/auth'
-import { TUserDataBase } from '../../../types/api'
+import type { TUserDataBase } from '../../../types/api'
+import type { TInitialStateAuth } from '../../../services/initialState'
 
 import cls from './style.module.css'
 
+import { useAppDispatch, useAppSelector } from '../../../hooks/useStore'
+
 export const ProfileEdit: FC = () => {
-  const dispatch = useDispatch()
-  const userData = useSelector((store: any) => store.auth)
+  const dispatch = useAppDispatch()
+  const userData = useAppSelector((store) => store.auth)
 
   const [defaultUserData, setDefaultUserData] = useState<TUserDataBase>({
     email: '',
@@ -34,7 +36,7 @@ export const ProfileEdit: FC = () => {
     })
   }
 
-  function setFormFromUserData(newUserData: TUserDataBase = userData) {
+  function setFormFromUserData(newUserData: TInitialStateAuth = userData) {
     setDefaultUserData({
       ...newUserData,
       password: '',
@@ -48,7 +50,6 @@ export const ProfileEdit: FC = () => {
 
   async function updateUserData() {
     setLoading(true)
-    // @ts-ignore
     await dispatch(setUserData(form))
     setLoading(false)
   }

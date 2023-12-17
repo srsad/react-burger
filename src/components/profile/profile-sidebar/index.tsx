@@ -1,5 +1,5 @@
-import type { FC } from "react"
-import {useDispatch } from "react-redux"
+import {type FC } from "react"
+import { useLocation } from "react-router-dom"
 
 import { ProfileSidebarItem } from "./profile-sidebar-item"
 import { logout } from "../../../services/actions/auth"
@@ -7,8 +7,11 @@ import { logout } from "../../../services/actions/auth"
 import { APP_PATH } from "../../../shared/common"
 import cls from "./style.module.css"
 
+import { useAppDispatch } from '../../../hooks/useStore'
+
 export const ProfileSidebar: FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const location = useLocation()
 
   const navItems: { title: string, path: string }[] = [{
     title: 'Профиль',
@@ -17,9 +20,16 @@ export const ProfileSidebar: FC = () => {
     title: 'История заказов',
     path: APP_PATH.ORDERS
   }]
+  
+  function getDesctirption(): string {
+    if (location.pathname === APP_PATH.ORDERS) {
+      return 'В этом разделе вы можете просмотреть свою историю заказов'
+    }
 
+    return 'В этом разделе вы можете изменить свои персональные данные'
+  }
+  
   async function logountHandler() {
-    // @ts-ignore
     await dispatch(logout())
   }
 
@@ -45,7 +55,7 @@ export const ProfileSidebar: FC = () => {
       </ul>
 
       <p className={`${cls.text} text text_type_main-default text_color_inactive`}>
-        В этом разделе вы можете изменить свои персональные данные
+        {getDesctirption()}
       </p>
     </nav>
   )

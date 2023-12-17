@@ -1,6 +1,5 @@
 import type { FC, FormEvent } from "react"
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, type NavigateFunction } from "react-router-dom"
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components"
 
@@ -9,11 +8,13 @@ import { register } from "../../services/actions/auth"
 import { APP_PATH } from "../../shared/common"
 import { useForm } from "../../hooks/useForm"
 
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
+
 export const Register: FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate: NavigateFunction = useNavigate()
 
-  const hasError = useSelector((state: any) => !!state.errors.errorMessage)
+  const hasError = useAppSelector((state) => !!state.errors.errorMessage)
 
   const defaultForm = {
     name: '',
@@ -28,7 +29,6 @@ export const Register: FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    // @ts-ignore
     await dispatch(register(form))
     setLoading(false)
 
