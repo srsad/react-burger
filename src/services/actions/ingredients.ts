@@ -45,10 +45,15 @@ export const setIngredientBun = (state: TInitialStateIngredients, action: Payloa
 }
 
 export const setIngredientItem = (state: TInitialStateIngredients, action: PayloadAction<TIngredientAgregate>) => {
-  state.burgerConstructor.items.push({
-    ...action.payload,
-    uuid: crypto.randomUUID() as UUID
-  })
+  const item = {
+    ...action.payload
+  }
+
+  if (!item?.uuid) {
+    item.uuid = crypto.randomUUID() as UUID
+  }
+
+  state.burgerConstructor.items.push(item)
 }
 
 export const moveIngredientItem = (state: TInitialStateIngredients, action: PayloadAction<{ oldIndex: number, newIndex: number }>) => {

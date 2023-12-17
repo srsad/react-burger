@@ -9,8 +9,6 @@ import { BurgerConstructorList } from "./burger-constructor-list"
 
 import { createOrder } from "../../services/actions/order"
 
-import { TIngredient } from "../../types/common"
-
 import { APP_PATH } from "../../shared/common"
 import cls from "./style.module.css"
 
@@ -89,6 +87,7 @@ export const BurgerConstructor: FC = () => {
               htmlType="button"
               disabled={loading}
               onClick={orderHandler}
+              data-testid="order-button"
             >
               Оформить заказ
             </Button>

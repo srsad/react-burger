@@ -63,7 +63,11 @@ export const BurgerConstructorList = () => {
   ))
 
   return (
-    <div className={cls.wrapper} ref={dropCntainerRef}>
+    <div
+      className={cls.wrapper}
+      data-testid="constructor"
+      ref={dropCntainerRef}
+    >
       {buns
         ? (
           <ConstructorElement
