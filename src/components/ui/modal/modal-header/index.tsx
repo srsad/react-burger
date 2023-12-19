@@ -18,7 +18,11 @@ export const ModalHeader: FC<IModalHeader> = ({
         {title}
       </h3>
 
-      <button className={cls.close} onClick={onClose}>
+      <button
+        className={cls.close}
+        onClick={onClose}
+        data-testid="close-modal"
+      >
         <CloseIcon type="primary" />
       </button>
     </div>

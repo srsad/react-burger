@@ -13,7 +13,6 @@ export const ingredientsSlice = createSlice({
     moveIngredientItem: actions.moveIngredientItem,
     removeIngredientItem: actions.removeIngredientItem,
     setIngredientBun: actions.setIngredientBun,
-    removeIngredientBun: actions.setIngredientBun,
     setIngredientDetatl: actions.setIngredientDetatl,
     setIngredientItem: actions.setIngredientItem,
     setIngredientsList: actions.setIngredientsList,
@@ -34,6 +33,6 @@ export const {
   cleanIngredientBun,
 
   setIngredientBun,
-  removeIngredientBun,
   setIngredientsList,
+  setLoading,
 } = ingredientsSlice.actions

@@ -6,7 +6,7 @@ import { TErrorResponse } from "../types/api"
 /**
  * Проверка ответа от сервера
  */
-function checkReponse<T>(res: Response): Promise<T> {
+export function checkResponse<T>(res: Response): Promise<T> {
   return res.ok ? res.json() : res.json().then((err: TErrorResponse) => Promise.reject(err))
 }
 
@@ -16,7 +16,7 @@ export default async function fetchInstance<T>(url: RequestInfo, options: any = 
   try {
     const res = await fetch(endpoint, options ?? {})
 
-    return await checkReponse<T>(res)
+    return await checkResponse<T>(res)
 
   } catch (err) {
     if ((err as { message: string }).message === "jwt expired") {
@@ -38,7 +38,7 @@ export default async function fetchInstance<T>(url: RequestInfo, options: any = 
 
       const res = await fetch(endpoint, options ?? {})
 
-      return await checkReponse<T>(res)
+      return await checkResponse<T>(res)
     } else {
       return Promise.reject(err)
     }

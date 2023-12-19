@@ -125,6 +125,7 @@ export const BurgerIngredients = () => {
 
       <section
         className={`${cls.ingredients} ingredients-container custom-scroll`}
+        data-testid="ingredients-list"
         onScroll={scrollHandler}
       >
         <BurgerIngredientsGroup

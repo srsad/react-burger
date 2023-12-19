@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "name": "Био-марсианский краторный space бургер",
+  "order": {
+    "ingredients": [
+      {
+        "_id": "643d69a5c3f7b9001cfa0943",
+        "name": "Соус фирменный Space Sauce",
+        "type": "sauce",
+        "proteins": 50,
+        "fat": 22,
+        "carbohydrates": 11,
+        "calories": 14,
+        "price": 80,
+        "image": "https://code.s3.yandex.net/react/code/sauce-04.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa0943",
+        "name": "Соус фирменный Space Sauce",
+        "type": "sauce",
+        "proteins": 50,
+        "fat": 22,
+        "carbohydrates": 11,
+        "calories": 14,
+        "price": 80,
+        "image": "https://code.s3.yandex.net/react/code/sauce-04.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa0941",
+        "name": "Биокотлета из марсианской Магнолии",
+        "type": "main",
+        "proteins": 420,
+        "fat": 142,
+        "carbohydrates": 242,
+        "calories": 4242,
+        "price": 424,
+        "image": "https://code.s3.yandex.net/react/code/meat-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/meat-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa093c",
+        "name": "Краторная булка N-200i",
+        "type": "bun",
+        "proteins": 80,
+        "fat": 24,
+        "carbohydrates": 53,
+        "calories": 420,
+        "price": 1255,
+        "image": "https://code.s3.yandex.net/react/code/bun-02.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
+        "__v": 0
+      }
+    ],
+    "_id": "657ef8dc87899c001b823aaf",
+    "owner": {
+      "name": "xodoci99678",
+      "email": "xodoci9968@soebing.com",
+      "createdAt": "2023-10-29T19:44:14.641Z",
+      "updatedAt": "2023-10-30T21:47:05.922Z"
+    },
+    "status": "done",
+    "name": "Био-марсианский краторный space бургер",
+    "createdAt": "2023-12-17T13:34:20.247Z",
+    "updatedAt": "2023-12-17T13:34:20.723Z",
+    "number": 29520,
+    "price": 1839
+  }
+}
